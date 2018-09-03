@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="rstudio.html">
-<link rel="next" href="temel-obje-turleri.html">
+<link rel="prev" href="listeyi-vektore-donusturmek.html">
+<link rel="next" href="isimlendirilmis-liste.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -168,10 +168,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6" data-path="listeler.html"><a href="listeler.html"><i class="fa fa-check"></i><b>6</b> Listeler</a><ul>
 <li class="chapter" data-level="6.1" data-path="listeler.html"><a href="listeler.html#listele-indisleri"><i class="fa fa-check"></i><b>6.1</b> Listele indisleri</a></li>
-<li class="chapter" data-level="6.2" data-path="listeler.html"><a href="listeler.html#listeyi-vektore-donusturmek"><i class="fa fa-check"></i><b>6.2</b> Listeyi vektöre dönüştürmek</a></li>
-<li class="chapter" data-level="6.3" data-path="listeler.html"><a href="listeler.html#listelerde-aritmetik-islemler"><i class="fa fa-check"></i><b>6.3</b> Listelerde aritmetik işlemler</a></li>
-<li class="chapter" data-level="6.4" data-path="listeler.html"><a href="listeler.html#isimlendirilmis-liste"><i class="fa fa-check"></i><b>6.4</b> İsimlendirilmiş liste</a></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="listeyi-vektore-donusturmek.html"><a href="listeyi-vektore-donusturmek.html"><i class="fa fa-check"></i><b>7</b> Listeyi vektöre dönüştürmek</a></li>
+<li class="chapter" data-level="8" data-path="listelerde-aritmetik-islemler.html"><a href="listelerde-aritmetik-islemler.html"><i class="fa fa-check"></i><b>8</b> Listelerde aritmetik işlemler</a></li>
+<li class="chapter" data-level="9" data-path="isimlendirilmis-liste.html"><a href="isimlendirilmis-liste.html"><i class="fa fa-check"></i><b>9</b> İsimlendirilmiş liste</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -192,100 +192,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ilkadimlar" class="section level1">
-<h1><span class="header-section-number">Bölüm 3</span> İlk Adımlar</h1>
-<p>Her zaman kod yazmaya başlamadan önce, en önemli basamak çalıştığımız klasörün ne olduğunu bilmek, gerekirse değiştirmek.</p>
-<p>Hangi klasörde çalıştığımızı öğrenmek için <code>getwd()</code> fonksiyonunu kullanabiliriz (get working directory). Çalıştığımız klasörü belirlemek içinse <code>setwd()</code> fonksiyonu kullanılıyor:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getwd</span>()</code></pre>
-<pre><code>## [1] &quot;/Users/melike/Dropbox/githubbooks/R_Giris&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&#39;~/Desktop&#39;</span>)
-<span class="kw">getwd</span>()</code></pre>
-<pre><code>## [1] &quot;/Users/melike/Desktop&quot;</code></pre>
-<p>Önerim, bilgisayarınızda R öğrenmek için bir klasör oluşturmanız ve kodunuzu, kullandığınız dosyaları vs. hep burada tutmanız. Aynı şekilde, belirli bir amaçla R kullandığınız zaman da masaüstüne rastgele isimlerle scriptleriniz kaydetmek yerine, düzenli bir şekilde uygun klasörleri içeriğe dair fikir veren isimlendirmelerle ya da belirli bir sistemle kaydetmeniz hayatınızı kolaylaştıracaktır.</p>
-<div id="hesap-makinesi-olarak-r" class="section level2">
-<h2><span class="header-section-number">3.1</span> Hesap Makinesi olarak R</h2>
-<p>En temekde hesap makinesi işlemleri yapmak için kullanabilirsiniz:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span><span class="op">+</span><span class="dv">2</span></code></pre>
-<pre><code>## [1] 4</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span><span class="op">*</span><span class="dv">3</span></code></pre>
-<pre><code>## [1] 6</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">10-5</span></code></pre>
-<pre><code>## [1] 5</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">3</span><span class="op">^</span><span class="dv">2</span></code></pre>
-<pre><code>## [1] 9</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">450</span><span class="op">/</span><span class="dv">3</span></code></pre>
-<pre><code>## [1] 150</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">200</span><span class="op">/</span><span class="dv">3</span></code></pre>
-<pre><code>## [1] 66.66667</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">200</span><span class="op">%%</span><span class="dv">3</span></code></pre>
-<pre><code>## [1] 2</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">200</span><span class="op">%/%</span><span class="dv">3</span></code></pre>
-<pre><code>## [1] 66</code></pre>
-<p>Çok açık olmayan operatörler:</p>
-<ul>
-<li><code>%%</code>– belirli bir tabanda kalan işlemi, modüler aritmetik. Örneğimizde 200ün 3e bölümünden kalan 2</li>
-<li><code>%/%</code> – tam sayı bölmesi, kalan olsa bile tam sayı olarak bölme işleminin sonucu</li>
-</ul>
-</div>
-<div id="fonksiyonlar" class="section level2">
-<h2><span class="header-section-number">3.2</span> Fonksiyonlar</h2>
-<p>R kendi içinde fonksiyonlar barındırır. Örneğin, başlangıçta kullandığımız <code>getwd()</code> gibi. Farkettiysenz, fonksiyonlardan bahsederken hep parantez kullanıyorum. Fonksiyonları değişkenlerden ayırabileceğiniz en basit şekil bu. Çok basit bir kaç fonksiyona bakalım:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#10 tabaninda log</span>
-<span class="kw">log10</span>(<span class="dv">100</span>) </code></pre>
-<pre><code>## [1] 2</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#2 tabaninda log</span>
-<span class="kw">log2</span>(<span class="dv">100</span>)</code></pre>
-<pre><code>## [1] 6.643856</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#4 tabaninda 10un log&#39;u</span>
-<span class="kw">log</span>(<span class="dv">10</span>,<span class="dv">4</span>) </code></pre>
-<pre><code>## [1] 1.660964</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#e uzeri 1</span>
-<span class="kw">exp</span>(<span class="dv">1</span>) </code></pre>
-<pre><code>## [1] 2.718282</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># e uzeri 2</span>
-<span class="kw">exp</span>(<span class="dv">2</span>) </code></pre>
-<pre><code>## [1] 7.389056</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"> <span class="co"># e uzeri 2 nin ln i - log taban belirtilmediginde e tabaninda islem yapar</span>
-<span class="kw">log</span>(<span class="kw">exp</span>(<span class="dv">2</span>))</code></pre>
-<pre><code>## [1] 2</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 16 nin koku</span>
-<span class="dv">16</span><span class="op">^</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)</code></pre>
-<pre><code>## [1] 4</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ayni islem fonksiyon ile</span>
-<span class="kw">sqrt</span>(<span class="dv">16</span>) </code></pre>
-<pre><code>## [1] 4</code></pre>
-</div>
-<div id="rda-degiskenler" class="section level2">
-<h2><span class="header-section-number">3.3</span> R’da değişkenler</h2>
-<p>Değişkenler, veri tutucular olarak düşünülebilir. R’da değişkene değer atamak icin <code>=</code> veya <code>&lt;-</code> operatörleri kullanılabilir. Örneğin x’e 3 değerini atamak için, aşağıdaki iki kod da geçerlidir.</p>
-<pre class="sourceCode r"><code class="sourceCode r">x =<span class="st"> </span><span class="dv">3</span>
-x</code></pre>
-<pre><code>## [1] 3</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">4</span>
-a</code></pre>
-<pre><code>## [1] 4</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">3</span> <span class="op">*</span><span class="st"> </span><span class="dv">4</span></code></pre>
-<pre><code>## [1] 12</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">x <span class="op">*</span><span class="st"> </span>a</code></pre>
-<pre><code>## [1] 12</code></pre>
-<p><code>&lt;-</code> tarihsel olarak R camiasında çokça kullanılsa da, pratik nedenlerle <code>=</code> kullanımı da oldukça yaygın ve yanlış değildir.</p>
-<div id="degisken-isimleri" class="section level3">
-<h3><span class="header-section-number">3.3.1</span> Değişken isimleri</h3>
-<p>R’da değişkenlere verebileceğimiz isimler için bazı sınırlayıcı kurallar vardır. Değişkenler, bir harf ile ya da harfin takip ettiği nokta ile başlar. Öğrneğin, <code>benimdegiskenim</code> geçerli bir değişken isim iken <code>2değisken</code> geçerli değildir, çünkü 2 bir harf değildir. <code>.degisken</code> geçerli bir değişken ismidir ancak <code>.2degisken</code> değildir. Ayrıca R’da kimi özel anlam içeren keilemerin değişken olarak kullanılması mümkün değildir, <code>ìf</code> ve <code>for</code> gibi. Bunları <code>?reserved</code> yazarak öğrenebilirsiniz.</p>
-<p>Yasak olmasa da diğer bir sorun R içinde varolan fonksiyonların isimleri ile değişken yaratmak. Çoğu zaman sorun olmadan çalışsa bile, karışıklığa sebep olduğu durumlar olabilir.</p>
-<p>R’da değişken isimleri küçük / büyük harfe duyarlıdır.</p>
-<p>Değişken isimlerini tuttuğu veriyle alakalı seçmek kolaylık sağlar.</p>
-
-</div>
-</div>
+<div id="listelerde-aritmetik-islemler" class="section level1">
+<h1><span class="header-section-number">Bölüm 8</span> Listelerde aritmetik işlemler</h1>
+<p>Şimdi bir de vektörler üzerinde yaptığımız işlemler listeler üzerinde de geçerli mi ona kısaca göz atalım. İlk olarak eşlenik olarak değerlendirebileceğimiz bir vektör objesi (myvec) ve liste objesi (mylist) yaratalım:</p>
+<pre class="sourceCode r"><code class="sourceCode r">myvec =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>
+myvec</code></pre>
+<pre><code>## [1] 1 2 3</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">mylist =<span class="st"> </span><span class="kw">list</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)
+mylist</code></pre>
+<pre><code>## [[1]]
+## [1] 1
+## 
+## [[2]]
+## [1] 2
+## 
+## [[3]]
+## [1] 3</code></pre>
+<p>Vektörler konusunda gördüğümüz kimi işlemlerin üzerinden geçip, listeler üzerinde de geçerli olup olmadıklarına bakalım. İlk olarak birleştirme işlemi:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(myvec, myvec)</code></pre>
+<pre><code>## [1] 1 2 3 1 2 3</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(mylist, mylist)</code></pre>
+<pre><code>## [[1]]
+## [1] 1
+## 
+## [[2]]
+## [1] 2
+## 
+## [[3]]
+## [1] 3
+## 
+## [[4]]
+## [1] 1
+## 
+## [[5]]
+## [1] 2
+## 
+## [[6]]
+## [1] 3</code></pre>
+<p>Yani, evet! Listeleri de birleştirebiliyoruz. Peki aritmetik işlemler?</p>
+<pre class="sourceCode r"><code class="sourceCode r">myvec <span class="op">*</span><span class="st"> </span><span class="dv">3</span></code></pre>
+<pre><code>## [1] 3 6 9</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">mylist <span class="op">*</span><span class="st"> </span><span class="dv">3</span></code></pre>
+<pre><code>## Error in mylist * 3: non-numeric argument to binary operator</code></pre>
+<p>Hayır, aritmetik işlemleri yapabilmek için listenin elemanlarına tek tek erişmeliyiz.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="rstudio.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="temel-obje-turleri.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="listeyi-vektore-donusturmek.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="isimlendirilmis-liste.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

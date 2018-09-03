@@ -1775,6 +1775,9 @@ kullandığımda elde ettiğim obje hala bir liste. Listenin elemanının
 içinde depolanan bilgiye erişmek içinse iki tane köşeli parantez
 kullandım ve bu durumda 5 ile çarpabildim.
 
+\hypertarget{listele-indisleri}{%
+\section{Listele indisleri}\label{listele-indisleri}}
+
 Listelerin diğer çok bariz olmayan özelliklerine bakalım. Örneğin,
 listemizin 4.elemanından kurtulmak isteyelim:
 
@@ -1827,6 +1830,10 @@ oluşan bir vektör elde edebilir miyiz?
 \begin{verbatim}
 ## Error in mylist[[1:3]]: recursive indexing failed at level 2
 \end{verbatim}
+
+\hypertarget{listeyi-vektore-donusturmek}{%
+\section{Listeyi vektöre
+dönüştürmek}\label{listeyi-vektore-donusturmek}}
 
 Hayır. İşe yaramadı. Peki bu ne demek, listeden asla vektör oluşturamaz
 mıyız? Hep liste olarak mı kalacak? Hayır, bunun için de
@@ -1922,6 +1929,10 @@ vektörü ise, \texttt{unlist()} fonksiyonunu kullanabiliriz.
 \begin{verbatim}
 ## [1] "0"    "1"    "2"    "TRUE" "a"
 \end{verbatim}
+
+\hypertarget{listelerde-aritmetik-islemler}{%
+\section{Listelerde aritmetik
+işlemler}\label{listelerde-aritmetik-islemler}}
 
 Şimdi bir de vektörler üzerinde yaptığımız işlemler listeler üzerinde de
 geçerli mi ona kısaca göz atalım. İlk olarak eşlenik olarak
@@ -2022,7 +2033,8 @@ Yani, evet! Listeleri de birleştirebiliyoruz. Peki aritmetik işlemler?
 Hayır, aritmetik işlemleri yapabilmek için listenin elemanlarına tek tek
 erişmeliyiz.
 
-Bir de isimlendirme işlemlerine bakalım:
+\hypertarget{isimlendirilmis-liste}{%
+\section{İsimlendirilmiş liste}\label{isimlendirilmis-liste}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
