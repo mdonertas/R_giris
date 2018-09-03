@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
+<link rel="prev" href="vektorler.html">
 
-<link rel="next" href="Giris.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -187,17 +187,160 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">R’a Giriş</h1>
-<p class="author"><em>H. Melike Dönertaş</em></p>
-<p class="date"><em>04-09-2018</em></p>
-</div>
-<div id="section" class="section level1 unnumbered">
-<h1></h1>
-<p>Bu kitap oluşturulma aşamasında olup, haftalık olarak güncellenecek, yeni bölümler eklenecektir. Önerileriniz ve sorularınız için bana <a href="mailto:donertas.melike@gmail.com">email ile ulaşabilirsiniz</a>.</p>
-<!-- R öğrenmeye ilk başlamam Bölüm \@ref(kaynaklar)de de linklerini verdiğim online dersler sayesinde oldu. Bu derslerin yaratıcılarına olan minnettarlığımı dile getirerek başlamalıyım.  -->
-<!-- Kitabın hazırlık sürecinin temeli 2014-2016 yılları arası ODTÜ Biyolojik Bilimler departmanında asistanlığını yaptığım 'Computational Biology using R' ve 'Introduction to Biometry' derslerine dayanır. Bu derslerde beraber asistanlik yaptığım araştırma görevlileri, derslerin koordinatorleri ve dersleri alan 100den fazla öğrenci, R konusunda kendi bilgilerimi geliştirmem için yardımcı olmanın yanı sıra bilginin aktarılması konusunda da çok şey öğrenmemi sağladılar, ve bunlar için hepsine çok teşekkür ediyorum.  -->
-<!-- Bu kitabı hazırlamam için beni destekleyen ve yanımda olan tüm arkadaşlarıma ve aileme sonsuz teşekkürü borç biliyorum. -->
+<div id="listeler" class="section level1">
+<h1><span class="header-section-number">Bölüm 6</span> Listeler</h1>
+<p>Bir önceki konuda vektörlerin tek bir temel obje tipinden oluştuğunu söyledik. Listeler bu açıdan vektörlerden farklıdır ve birden fazla obje tipini içerebilir.</p>
+<p>İlk olarak bir liste oluşturalım:</p>
+<pre class="sourceCode r"><code class="sourceCode r">mylist =<span class="st"> </span><span class="kw">list</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">TRUE</span>, <span class="st">&#39;a&#39;</span>)
+mylist</code></pre>
+<pre><code>## [[1]]
+## [1] 1
+## 
+## [[2]]
+## [1] 2
+## 
+## [[3]]
+## [1] TRUE
+## 
+## [[4]]
+## [1] &quot;a&quot;</code></pre>
+<p>Bu sefer vektörlerde karşılaştığımız tür dönüştürme davranışı işe karşılaşmadık ve her eleman ilk girdiğimiz şekilde kaldı. Şimdi listenin 1. elemanına ulaşalım:</p>
+<pre class="sourceCode r"><code class="sourceCode r">mylist[<span class="dv">1</span>]</code></pre>
+<pre><code>## [[1]]
+## [1] 1</code></pre>
+<p>Ne yazık ki eğer listemizin birinci elemanı ile işlem yapmak istiyorsak, bu doğru bir yöntem değil. Çünkü şu anda hala 1. elemana ulaşmadık. Listelerde her eleman bir tutucu olup, bir eleman içindeki değere ulaşmak istiyorsak çift köşeli parantez kullanmamız gerekir. Farkı daha iyi görebilmek için:</p>
+<pre class="sourceCode r"><code class="sourceCode r">mylist[<span class="dv">1</span>]<span class="op">*</span><span class="dv">5</span></code></pre>
+<pre><code>## Error in mylist[1] * 5: non-numeric argument to binary operator</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(mylist[<span class="dv">1</span>])</code></pre>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">mylist[[<span class="dv">1</span>]]</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">mylist[[<span class="dv">1</span>]]<span class="op">*</span><span class="dv">5</span></code></pre>
+<pre><code>## [1] 5</code></pre>
+<p>İlk olarak listenin birinci elemanına tek köşeli parantez ile ulaşabileceğimizi varsayıp, 5 ile çarpmaya çalıştık. Ancak hata aldık. <code>class()</code> fonksiyonunu kullanıp gördük ki, tek köşeli parantez kullandığımda elde ettiğim obje hala bir liste. Listenin elemanının içinde depolanan bilgiye erişmek içinse iki tane köşeli parantez kullandım ve bu durumda 5 ile çarpabildim.</p>
+<p>Listelerin diğer çok bariz olmayan özelliklerine bakalım. Örneğin, listemizin 4.elemanından kurtulmak isteyelim:</p>
+<pre class="sourceCode r"><code class="sourceCode r">mylist[<span class="op">-</span><span class="dv">4</span>]</code></pre>
+<pre><code>## [[1]]
+## [1] 1
+## 
+## [[2]]
+## [1] 2
+## 
+## [[3]]
+## [1] TRUE</code></pre>
+<p>Ya da</p>
+<pre class="sourceCode r"><code class="sourceCode r">mylist[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</code></pre>
+<pre><code>## [[1]]
+## [1] 1
+## 
+## [[2]]
+## [1] 2
+## 
+## [[3]]
+## [1] TRUE</code></pre>
+<p>Bunlar tam olarak beklediğimiz gibi davranıyor ve 4. elemanı eksik liste elde ediyoruz. Peki çift köşeli parantez kullanarak, ilk üç elemandan oluşan bir vektör elde edebilir miyiz?</p>
+<pre class="sourceCode r"><code class="sourceCode r">mylist[[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]]</code></pre>
+<pre><code>## Error in mylist[[1:3]]: recursive indexing failed at level 2</code></pre>
+<p>Hayır. İşe yaramadı. Peki bu ne demek, listeden asla vektör oluşturamaz mıyız? Hep liste olarak mı kalacak? Hayır, bunun için de <code>as.vector()</code> fonksiyonunu kullanabiliriz.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.vector</span>(mylist, <span class="dt">mode =</span> <span class="st">&#39;numeric&#39;</span>)</code></pre>
+<pre><code>## Warning in as.vector(mylist, mode = &quot;numeric&quot;): NAs introduced by coercion</code></pre>
+<pre><code>## [1]  1  2  1 NA</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.vector</span>(mylist, <span class="dt">mode =</span> <span class="st">&#39;character&#39;</span>)</code></pre>
+<pre><code>## [1] &quot;1&quot;    &quot;2&quot;    &quot;TRUE&quot; &quot;a&quot;</code></pre>
+<p>Bu fonksiyonlar varsa da çok kullanıldıklarını söyleyemem. Her veri türünün kendine özgü avantaj ve dezavantajları var ve farklı tür veri için belli veri tipleri daha uygun olacaktır. Genelde dönüştürmeler kimi fonksiyonlar sadece vektör, ya da sadece liste tipinde objelerle çalışıyorsa gerekli olabilir. Onun dışında listeden vektöre dönüştürme işlemleri kafa karıştırıcı olabilir. Bunun bir sebebi de listelerin elemanlarının tek bir elemandan oluşma zorunluluğunun olmamasıdır.</p>
+<pre class="sourceCode r"><code class="sourceCode r">mylist2 =<span class="st"> </span><span class="kw">list</span>(<span class="dv">0</span>, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), T, <span class="st">&#39;a&#39;</span>)
+mylist2</code></pre>
+<pre><code>## [[1]]
+## [1] 0
+## 
+## [[2]]
+## [1] 1 2
+## 
+## [[3]]
+## [1] TRUE
+## 
+## [[4]]
+## [1] &quot;a&quot;</code></pre>
+<p>Bu örnekte, listemizin ikinci elemanında iki elemanlı bir vektör sakladık. Şimdi az önceki yöntemi kullanmaya çalışırsak:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.vector</span>(mylist2, <span class="dt">mode =</span> <span class="st">&#39;numeric&#39;</span>)</code></pre>
+<pre><code>## Error in as.vector(mylist2, mode = &quot;numeric&quot;): (list) object cannot be coerced to type &#39;double&#39;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.vector</span>(mylist2, <span class="dt">mode =</span> <span class="st">&#39;character&#39;</span>)</code></pre>
+<pre><code>## [1] &quot;0&quot;       &quot;c(1, 2)&quot; &quot;TRUE&quot;    &quot;a&quot;</code></pre>
+<p>İkisi de beklediğimiz gibi bir sonuç değil. Eğer ki elde etmek istediğimiz vektör <code>c('0', '1', '2', 'T', 'a')</code> vektörü ise, <code>unlist()</code> fonksiyonunu kullanabiliriz.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unlist</span>(mylist2)</code></pre>
+<pre><code>## [1] &quot;0&quot;    &quot;1&quot;    &quot;2&quot;    &quot;TRUE&quot; &quot;a&quot;</code></pre>
+<p>Şimdi bir de vektörler üzerinde yaptığımız işlemler listeler üzerinde de geçerli mi ona kısaca göz atalım. İlk olarak eşlenik olarak değerlendirebileceğimiz bir vektör objesi (myvec) ve liste objesi (mylist) yaratalım:</p>
+<pre class="sourceCode r"><code class="sourceCode r">myvec =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>
+myvec</code></pre>
+<pre><code>## [1] 1 2 3</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">mylist =<span class="st"> </span><span class="kw">list</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)
+mylist</code></pre>
+<pre><code>## [[1]]
+## [1] 1
+## 
+## [[2]]
+## [1] 2
+## 
+## [[3]]
+## [1] 3</code></pre>
+<p>Vektörler konusunda gördüğümüz kimi işlemlerin üzerinden geçip, listeler üzerinde de geçerli olup olmadıklarına bakalım. İlk olarak birleştirme işlemi:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(myvec, myvec)</code></pre>
+<pre><code>## [1] 1 2 3 1 2 3</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(mylist, mylist)</code></pre>
+<pre><code>## [[1]]
+## [1] 1
+## 
+## [[2]]
+## [1] 2
+## 
+## [[3]]
+## [1] 3
+## 
+## [[4]]
+## [1] 1
+## 
+## [[5]]
+## [1] 2
+## 
+## [[6]]
+## [1] 3</code></pre>
+<p>Yani, evet! Listeleri de birleştirebiliyoruz. Peki aritmetik işlemler?</p>
+<pre class="sourceCode r"><code class="sourceCode r">myvec <span class="op">*</span><span class="st"> </span><span class="dv">3</span></code></pre>
+<pre><code>## [1] 3 6 9</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">mylist <span class="op">*</span><span class="st"> </span><span class="dv">3</span></code></pre>
+<pre><code>## Error in mylist * 3: non-numeric argument to binary operator</code></pre>
+<p>Hayır, aritmetik işlemleri yapabilmek için listenin elemanlarına tek tek erişmeliyiz.</p>
+<p>Bir de isimlendirme işlemlerine bakalım:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(myvec) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>)
+myvec</code></pre>
+<pre><code>## a b c 
+## 1 2 3</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(mylist) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>)
+mylist</code></pre>
+<pre><code>## $a
+## [1] 1
+## 
+## $b
+## [1] 2
+## 
+## $c
+## [1] 3</code></pre>
+<p>Evet, isimlendirme de çalışıyor! Peki isimli listede alt küme alma işlemleri nasıl oluyor?</p>
+<pre class="sourceCode r"><code class="sourceCode r">myvec[<span class="st">&#39;a&#39;</span>]</code></pre>
+<pre><code>## a 
+## 1</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">mylist[<span class="st">&#39;a&#39;</span>]</code></pre>
+<pre><code>## $a
+## [1] 1</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">mylist[[<span class="st">&#39;a&#39;</span>]]</code></pre>
+<pre><code>## [1] 1</code></pre>
+<p>Aynı indismiş gibi isimleri kullanarak da liste elemanlarına ulaşabiliyoruz. Ancak listelerde aynı amaçla kullanabileceğimiz başka bir operatör daha var: <code>$</code></p>
+<pre class="sourceCode r"><code class="sourceCode r">mylist<span class="op">$</span>a</code></pre>
+<pre><code>## [1] 1</code></pre>
+<p>Ve bu operatör çift köşeli paranteze denk işliyor, görüdüğünüz gibi liste tipinde bir obje değil, direkt olarak ilk eleman içine kaydedilen bilgiye ulaştık. Peki bu vektörlerde de çalışır mı?</p>
+<pre class="sourceCode r"><code class="sourceCode r">myvec<span class="op">$</span>a</code></pre>
+<pre><code>## Error in myvec$a: $ operator is invalid for atomic vectors</code></pre>
+<p>Hayır!</p>
 
 </div>
             </section>
@@ -205,8 +348,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
+<a href="vektorler.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="Giris.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
