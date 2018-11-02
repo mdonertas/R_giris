@@ -125,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{04-09-2018}
+    \date{02-11-2018}
 
 \usepackage{booktabs}
 \renewcommand{\chaptermark}[1]{\markboth{{\chaptername\ \thechapter.\ #1}}{}}
@@ -2130,6 +2130,279 @@ bilgiye ulaştık. Peki bu vektörlerde de çalışır mı?
 \end{verbatim}
 
 Hayır!
+
+\hypertarget{matrisler}{%
+\chapter{Matrisler}\label{matrisler}}
+
+Matrisler, iki boyutta düzenlenmiş verilerdir, yanyana ya da altalta
+dizilenmis vektör gibi düşünülebilirler. İkişer elemanlı 3 vektörümüz
+oldugunu düşünelim:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\DecValTok{2}
+\NormalTok{b <-}\StringTok{ }\DecValTok{3}\OperatorTok{:}\DecValTok{4}
+\NormalTok{c <-}\StringTok{ }\DecValTok{5}\OperatorTok{:}\DecValTok{6}
+\end{Highlighting}
+\end{Shaded}
+
+Şimdi bunları yanyana birleştirip, iki satır üç sütunlu bir matris
+oluşturalım. Bunun için \texttt{cbind()} yani, column-bind (sütun
+bağlama) fonksiyonunu kullanacağız.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cbind}\NormalTok{(a, b, c)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      a b c
+## [1,] 1 3 5
+## [2,] 2 4 6
+\end{verbatim}
+
+Aynı şekilde \texttt{rbind()} yani row-bind (satır bağlama) fonksiyonu
+ile bu vektörleri satır satır birleştirip, 3 satır iki sutunlu bir
+matris de elde edebiliriz:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rbind}\NormalTok{(a, b, c)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [,1] [,2]
+## a    1    2
+## b    3    4
+## c    5    6
+\end{verbatim}
+
+Her satır ve sütunu ayrı ayrı vektör şeklinde birleştirerek matris
+oluşturmak yerine \texttt{matrix()} fonksiyonunu da kullanabiliriz.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{matrix}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{9}\NormalTok{, }\DataTypeTok{ncol =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9
+\end{verbatim}
+
+Burada 1den 9a kadar sayıları 3 sütuna (ncol = 3 ile belirttik)
+yerleştirdik. Aynı şekilde satır sayısını da girebilirdik (nrow).
+\texttt{matrix()} fonksiyonu ile kullanabileceğimiz bir diğer argüman
+ise \texttt{byrow} argümanı. Önceki örnekte 1den 9a kadar sayıları
+içeren bir vektör oluşturup 3 sütuna bölmüştük. Bu fonksiyon varsayılan
+argümanlarla çalıştırıldığında önce birinci sütunu doldurup sonra
+ikinciye geçiyor. Eğer bunun yerine önce satırları doldurmasını
+istersek:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{matrix}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{9}\NormalTok{, }\DataTypeTok{ncol =} \DecValTok{3}\NormalTok{, }\DataTypeTok{byrow =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    4    5    6
+## [3,]    7    8    9
+\end{verbatim}
+
+Şimdi 1:3 birinci satırı, 4:6 ikinci satırı oluşturdu.
+
+\hypertarget{matris-boyutlar}{%
+\section{Matris boyutları}\label{matris-boyutlar}}
+
+Bunlar dışında matrislerin vektörlerden bir farkı da boyut özelliğinin
+olması. Oysa vektörlerde uzunluk özelliğimiz vardır. Şu örneklere
+bakalım:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mymat <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(a, b, c)}
+\KeywordTok{length}\NormalTok{(a)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{length}\NormalTok{(mymat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 6
+\end{verbatim}
+
+`mymat' objesinin boyuna bakmak istediğimizde toplam eleman sayısı olan
+6yı veriyor. Oysa bu kaç satır ve sütundan oluştuğu bilgisini
+vermediğinden, matrisin yapısını anlamamızı zorlaştırıyor. Bu bilgiyi
+öğrenmek için \texttt{dim()} fonksiyonunu kullanacağız.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dim}\NormalTok{(mymat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2 3
+\end{verbatim}
+
+Burada önemli olan bir bilgi, dim() fonksiyonu ilk olarak satır sayısını
+sonra sütun sayısını yazar. Son olarak \texttt{dim()} fonksiyonunun
+vektörler üzerinde işe yaramayacağını görelim:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dim}\NormalTok{(a)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## NULL
+\end{verbatim}
+
+\hypertarget{matris-indisleri}{%
+\section{Matris indisleri}\label{matris-indisleri}}
+
+Matris içindeki verilere ulaşmak için yine köşeli parantez
+kullanılabilir. Ancak bu sefer birden fazla boyut olduğundan satır ve
+sütunu virgül ile ayırarak yazacağız. Örneğin:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mymat}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      a b c
+## [1,] 1 3 5
+## [2,] 2 4 6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mymat[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## b c 
+## 3 5
+\end{verbatim}
+
+\texttt{mymat{[}1,\ 2:3{]}} kodu ile, mymat matrisinin 1. satırının 2den
+3e kadar olan elemanlarını istemiş oluyoruz.
+
+\hypertarget{aritmetik-islemler}{%
+\section{Aritmetik işlemler}\label{aritmetik-islemler}}
+
+Aynı vektörlerde olduğu gibi aritmetik işlemler yapmak da mümkün.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mymat }\OperatorTok{*}\StringTok{ }\DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      a  b  c
+## [1,] 3  9 15
+## [2,] 6 12 18
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mymat }\OperatorTok{+}\StringTok{ }\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      a b c
+## [1,] 3 5 7
+## [2,] 4 6 8
+\end{verbatim}
+
+Peki ya uzunluğu birden büyük bir vektör ile işlem yapmak istersek?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mymat}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      a b c
+## [1,] 1 3 5
+## [2,] 2 4 6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mymat }\OperatorTok{*}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      a b  c
+## [1,] 1 3  5
+## [2,] 4 8 12
+\end{verbatim}
+
+Bunu anlamak için matrisin ilk üç elemanına bakalım:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mymat[}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 2 3
+\end{verbatim}
+
+Virgül ile satır ve sütun ayırmadığımızdan elde ettiğimiz obje de
+matrisin ilk 3 elemanından oluşan bir vektör oldu. Buradan gördüğümüz
+gibi matrisin birinci elemanı ilk satır ilk sütunda, ikinci elemanı ilk
+sütün ikinci satırda - ve sonra diğer sütunlara geçiyoruz. Bu matrisi
+bir vektör ile işlem yapmak istediğimizde de aynı vektörlerde olduğu
+gibi önce birinci eleman vektördeki birinci elemanla, ikinci eleman
+vektördeki ikinci elemanla işleme giriyor. Vektördeki elemanlar
+bittiğinden tekrar başa dönüyoruz ve matrisin üçüncü elemanı vektörün
+ilk elemanı ile işleme giriyor ve böyle devam ediyor. Bu işlemin satır
+ve sütun sayısıyla alakalı olmadığını göstermek adına bir başka örnek:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mymat }\OperatorTok{*}\StringTok{ }\DecValTok{1}\OperatorTok{:}\DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      a b  c
+## [1,] 1 9 10
+## [2,] 4 4 18
+\end{verbatim}
+
+\hypertarget{matris-aritmetigi}{%
+\section{Matris aritmetiği}\label{matris-aritmetigi}}
+
+Çok yakında\ldots{}
 
 \bibliography{lib.bib}
 
