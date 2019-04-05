@@ -51,7 +51,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -64,13 +64,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -176,7 +174,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1" data-path="matrisler.html"><a href="matrisler.html#matris-boyutlar"><i class="fa fa-check"></i><b>7.1</b> Matris boyutları</a></li>
 <li class="chapter" data-level="7.2" data-path="matrisler.html"><a href="matrisler.html#matris-indisleri"><i class="fa fa-check"></i><b>7.2</b> Matris indisleri</a></li>
 <li class="chapter" data-level="7.3" data-path="matrisler.html"><a href="matrisler.html#aritmetik-islemler"><i class="fa fa-check"></i><b>7.3</b> Aritmetik işlemler</a></li>
-<li class="chapter" data-level="7.4" data-path="matrisler.html"><a href="matrisler.html#matris-aritmetigi"><i class="fa fa-check"></i><b>7.4</b> Matris aritmetiği</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -283,10 +280,55 @@ c &lt;-<span class="st"> </span><span class="dv">5</span><span class="op">:</spa
 <pre><code>##      a b  c
 ## [1,] 1 9 10
 ## [2,] 4 4 18</code></pre>
-</div>
-<div id="matris-aritmetigi" class="section level2">
-<h2><span class="header-section-number">7.4</span> Matris aritmetiği</h2>
-<p>Çok yakında…</p>
+<p>Matris transpozu, satır ve sütunların yer değiştirmesi işlemidir ve <code>t()</code> fonksiyonu ile gerçekleştirilir.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t</span>(mymat)</code></pre>
+<pre><code>##   [,1] [,2]
+## a    1    2
+## b    3    4
+## c    5    6</code></pre>
+<p>Önceki örnekler matris çarpımı değil, matris içindeki değerlerin başka bir skalar ya da vektörle çarpımına örnekti. Rda matris çarpımı, ya da matris nokta çarpımı, yapmak da mümkün ve bu <code>%*%</code> operatörü ile yapılabilir. İki matrisin nokta çarpımı işlemine girebilmesi için birinci matrisin sütün sayısının, ikinci matrisin satır sayısına eşit olması gerekir.</p>
+<pre class="sourceCode r"><code class="sourceCode r">mymat2 =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)
+mymat2</code></pre>
+<pre><code>##      [,1]
+## [1,]    1
+## [2,]    2
+## [3,]    3</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">mymat <span class="op">%*%</span><span class="st"> </span>mymat2</code></pre>
+<pre><code>##      [,1]
+## [1,]   22
+## [2,]   28</code></pre>
+<p>Bir matrisin tersi, kendisi ile çarpıldığında birim matrisi verir ve Rda <code>solve()</code> fonksiyonu ile hesaplanabilir. Bu işlem ancak kare matrisler üzerinde gerçekleştirilebilir.</p>
+<pre class="sourceCode r"><code class="sourceCode r">mymat =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>), <span class="dv">3</span>, <span class="dv">3</span>)
+mymat</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    9    3    8
+## [2,]    6    7    4
+## [3,]    1    5    2</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">solve</span>(mymat)</code></pre>
+<pre><code>##             [,1]        [,2]       [,3]
+## [1,] -0.05660377  0.32075472 -0.4150943
+## [2,] -0.07547170  0.09433962  0.1132075
+## [3,]  0.21698113 -0.39622642  0.4245283</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">mymat <span class="op">%*%</span><span class="st"> </span><span class="kw">solve</span>(mymat)</code></pre>
+<pre><code>##               [,1]          [,2] [,3]
+## [1,]  1.000000e+00  0.000000e+00    0
+## [2,] -1.110223e-16  1.000000e+00    0
+## [3,]  0.000000e+00 -2.220446e-16    1</code></pre>
+<p>Bunlar dışında sık kullanılan matris işlemleri için <code>crossprod()</code>, <code>det()</code>, <code>eigen()</code>, <code>svd()</code> gibi fonksiyonlar da temel Rda mevcuttur.</p>
+<p>Son olarak, matrislerle çalışırken kolaylaştırıcı <code>rowMeans()</code>, <code>colMeans()</code>, <code>rowSums()</code>, <code>colSums()</code> gibi satır / sütun ortalamalarına ve toplamlarına erişmek için fonksiyonlar mevcut.</p>
+<pre class="sourceCode r"><code class="sourceCode r">mymat</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    9    3    8
+## [2,]    6    7    4
+## [3,]    1    5    2</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rowSums</span>(mymat)</code></pre>
+<pre><code>## [1] 20 17  8</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colSums</span>(mymat)</code></pre>
+<pre><code>## [1] 16 15 14</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rowMeans</span>(mymat)</code></pre>
+<pre><code>## [1] 6.666667 5.666667 2.666667</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colMeans</span>(mymat)</code></pre>
+<pre><code>## [1] 5.333333 5.000000 4.666667</code></pre>
 
 </div>
 </div>
