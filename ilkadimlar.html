@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>R’a Giriş</title>
-  <meta name="description" content="R istatistiksel programlama diline giris kitapcigi">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Bölüm 3 İlk Adımlar | R’a Giriş</title>
+  <meta name="description" content="R istatistiksel programlama diline giris kitapcigi" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="R’a Giriş" />
+  <meta property="og:title" content="Bölüm 3 İlk Adımlar | R’a Giriş" />
   <meta property="og:type" content="book" />
   
   
@@ -17,28 +16,31 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="R’a Giriş" />
+  <meta name="twitter:title" content="Bölüm 3 İlk Adımlar | R’a Giriş" />
   
   <meta name="twitter:description" content="R istatistiksel programlama diline giris kitapcigi" />
   
 
-<meta name="author" content="H. Melike Dönertaş">
+<meta name="author" content="H. Melike Dönertaş" />
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="rstudio.html">
-<link rel="next" href="temel-obje-turleri.html">
+<link rel="prev" href="rstudio.html"/>
+<link rel="next" href="temel-obje-türleri.html"/>
+<script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -46,29 +48,32 @@
 
 
 
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -77,9 +82,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -129,51 +134,60 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li><a href="index.html#section"></a></li>
-<li class="chapter" data-level="1" data-path="Giris.html"><a href="Giris.html"><i class="fa fa-check"></i><b>1</b> Giriş</a><ul>
+<li class="chapter" data-level="1" data-path="Giris.html"><a href="Giris.html"><i class="fa fa-check"></i><b>1</b> Giriş</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="Giris.html"><a href="Giris.html#r-nedir"><i class="fa fa-check"></i><b>1.1</b> R nedir?</a></li>
-<li class="chapter" data-level="1.2" data-path="Giris.html"><a href="Giris.html#r-avantajlar"><i class="fa fa-check"></i><b>1.2</b> R Avantajları</a></li>
-<li class="chapter" data-level="1.3" data-path="Giris.html"><a href="Giris.html#r-ogrenmeye-nasl-baslarm"><i class="fa fa-check"></i><b>1.3</b> R Öğrenmeye Nasıl Başlarım?</a><ul>
+<li class="chapter" data-level="1.2" data-path="Giris.html"><a href="Giris.html#r-avantajları"><i class="fa fa-check"></i><b>1.2</b> R Avantajları</a></li>
+<li class="chapter" data-level="1.3" data-path="Giris.html"><a href="Giris.html#r-öğrenmeye-nasıl-başlarım"><i class="fa fa-check"></i><b>1.3</b> R Öğrenmeye Nasıl Başlarım?</a>
+<ul>
 <li class="chapter" data-level="1.3.1" data-path="Giris.html"><a href="Giris.html#r-kurulumu"><i class="fa fa-check"></i><b>1.3.1</b> R kurulumu</a></li>
 <li class="chapter" data-level="1.3.2" data-path="Giris.html"><a href="Giris.html#rstudio"><i class="fa fa-check"></i><b>1.3.2</b> RStudio</a></li>
 <li class="chapter" data-level="1.3.3" data-path="Giris.html"><a href="Giris.html#kaynaklar"><i class="fa fa-check"></i><b>1.3.3</b> Kaynaklar</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="Giris.html"><a href="Giris.html#rstudio"><i class="fa fa-check"></i><b>2</b> RStudio Arayüzü</a><ul>
+<li class="chapter" data-level="2" data-path="Giris.html"><a href="Giris.html#rstudio"><i class="fa fa-check"></i><b>2</b> RStudio Arayüzü</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="rstudio.html"><a href="rstudio.html"><i class="fa fa-check"></i><b>2.1</b> Konsol, Terminal (1)</a></li>
-<li class="chapter" data-level="2.2" data-path="rstudio.html"><a href="rstudio.html#dosyalar-cizimler-paketler-yardm-2"><i class="fa fa-check"></i><b>2.2</b> Dosyalar, Çizimler, Paketler, Yardım (2)</a></li>
-<li class="chapter" data-level="2.3" data-path="rstudio.html"><a href="rstudio.html#ortam-gecmis-3"><i class="fa fa-check"></i><b>2.3</b> Ortam, Geçmiş (3)</a></li>
-<li class="chapter" data-level="2.4" data-path="rstudio.html"><a href="rstudio.html#editor-4"><i class="fa fa-check"></i><b>2.4</b> Editör (4)</a></li>
+<li class="chapter" data-level="2.2" data-path="rstudio.html"><a href="rstudio.html#dosyalar-çizimler-paketler-yardım-2"><i class="fa fa-check"></i><b>2.2</b> Dosyalar, Çizimler, Paketler, Yardım (2)</a></li>
+<li class="chapter" data-level="2.3" data-path="rstudio.html"><a href="rstudio.html#ortam-geçmiş-3"><i class="fa fa-check"></i><b>2.3</b> Ortam, Geçmiş (3)</a></li>
+<li class="chapter" data-level="2.4" data-path="rstudio.html"><a href="rstudio.html#editör-4"><i class="fa fa-check"></i><b>2.4</b> Editör (4)</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="ilkadimlar.html"><a href="ilkadimlar.html"><i class="fa fa-check"></i><b>3</b> İlk Adımlar</a><ul>
+<li class="chapter" data-level="3" data-path="ilkadimlar.html"><a href="ilkadimlar.html"><i class="fa fa-check"></i><b>3</b> İlk Adımlar</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="ilkadimlar.html"><a href="ilkadimlar.html#hesap-makinesi-olarak-r"><i class="fa fa-check"></i><b>3.1</b> Hesap Makinesi olarak R</a></li>
 <li class="chapter" data-level="3.2" data-path="ilkadimlar.html"><a href="ilkadimlar.html#fonksiyonlar"><i class="fa fa-check"></i><b>3.2</b> Fonksiyonlar</a></li>
-<li class="chapter" data-level="3.3" data-path="ilkadimlar.html"><a href="ilkadimlar.html#rda-degiskenler"><i class="fa fa-check"></i><b>3.3</b> R’da değişkenler</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="ilkadimlar.html"><a href="ilkadimlar.html#degisken-isimleri"><i class="fa fa-check"></i><b>3.3.1</b> Değişken isimleri</a></li>
+<li class="chapter" data-level="3.3" data-path="ilkadimlar.html"><a href="ilkadimlar.html#rda-değişkenler"><i class="fa fa-check"></i><b>3.3</b> R’da değişkenler</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="ilkadimlar.html"><a href="ilkadimlar.html#değişken-isimleri"><i class="fa fa-check"></i><b>3.3.1</b> Değişken isimleri</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="temel-obje-turleri.html"><a href="temel-obje-turleri.html"><i class="fa fa-check"></i><b>4</b> Temel obje türleri</a><ul>
-<li class="chapter" data-level="4.1" data-path="temel-obje-turleri.html"><a href="temel-obje-turleri.html#karakter-character"><i class="fa fa-check"></i><b>4.1</b> Karakter (character)</a></li>
-<li class="chapter" data-level="4.2" data-path="temel-obje-turleri.html"><a href="temel-obje-turleri.html#numerik-numeric"><i class="fa fa-check"></i><b>4.2</b> Nümerik (numeric)</a></li>
-<li class="chapter" data-level="4.3" data-path="temel-obje-turleri.html"><a href="temel-obje-turleri.html#tam-saylar-integer"><i class="fa fa-check"></i><b>4.3</b> Tam sayılar (integer)</a></li>
-<li class="chapter" data-level="4.4" data-path="temel-obje-turleri.html"><a href="temel-obje-turleri.html#kompleks-complex"><i class="fa fa-check"></i><b>4.4</b> Kompleks (complex)</a></li>
-<li class="chapter" data-level="4.5" data-path="temel-obje-turleri.html"><a href="temel-obje-turleri.html#mantksal-logical-boolean"><i class="fa fa-check"></i><b>4.5</b> Mantıksal (logical, boolean)</a></li>
+<li class="chapter" data-level="4" data-path="temel-obje-türleri.html"><a href="temel-obje-türleri.html"><i class="fa fa-check"></i><b>4</b> Temel obje türleri</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="temel-obje-türleri.html"><a href="temel-obje-türleri.html#karakter-character"><i class="fa fa-check"></i><b>4.1</b> Karakter (character)</a></li>
+<li class="chapter" data-level="4.2" data-path="temel-obje-türleri.html"><a href="temel-obje-türleri.html#nümerik-numeric"><i class="fa fa-check"></i><b>4.2</b> Nümerik (numeric)</a></li>
+<li class="chapter" data-level="4.3" data-path="temel-obje-türleri.html"><a href="temel-obje-türleri.html#tam-sayılar-integer"><i class="fa fa-check"></i><b>4.3</b> Tam sayılar (integer)</a></li>
+<li class="chapter" data-level="4.4" data-path="temel-obje-türleri.html"><a href="temel-obje-türleri.html#kompleks-complex"><i class="fa fa-check"></i><b>4.4</b> Kompleks (complex)</a></li>
+<li class="chapter" data-level="4.5" data-path="temel-obje-türleri.html"><a href="temel-obje-türleri.html#mantıksal-logical-boolean"><i class="fa fa-check"></i><b>4.5</b> Mantıksal (logical, boolean)</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="vektorler.html"><a href="vektorler.html"><i class="fa fa-check"></i><b>5</b> Vektörler</a><ul>
-<li class="chapter" data-level="5.1" data-path="vektorler.html"><a href="vektorler.html#vektorleri-birlestirmek"><i class="fa fa-check"></i><b>5.1</b> Vektorleri birleştirmek</a></li>
-<li class="chapter" data-level="5.2" data-path="vektorler.html"><a href="vektorler.html#vektor-aritmetigi"><i class="fa fa-check"></i><b>5.2</b> Vektor aritmetiği</a></li>
-<li class="chapter" data-level="5.3" data-path="vektorler.html"><a href="vektorler.html#vektor-indisleri"><i class="fa fa-check"></i><b>5.3</b> Vektör indisleri</a></li>
-<li class="chapter" data-level="5.4" data-path="vektorler.html"><a href="vektorler.html#isimlendirilmis-vektor"><i class="fa fa-check"></i><b>5.4</b> İsimlendirilmiş vektör</a></li>
+<li class="chapter" data-level="5" data-path="vektörler.html"><a href="vektörler.html"><i class="fa fa-check"></i><b>5</b> Vektörler</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="vektörler.html"><a href="vektörler.html#vektorleri-birleştirmek"><i class="fa fa-check"></i><b>5.1</b> Vektorleri birleştirmek</a></li>
+<li class="chapter" data-level="5.2" data-path="vektörler.html"><a href="vektörler.html#vektor-aritmetiği"><i class="fa fa-check"></i><b>5.2</b> Vektor aritmetiği</a></li>
+<li class="chapter" data-level="5.3" data-path="vektörler.html"><a href="vektörler.html#vektör-indisleri"><i class="fa fa-check"></i><b>5.3</b> Vektör indisleri</a></li>
+<li class="chapter" data-level="5.4" data-path="vektörler.html"><a href="vektörler.html#isimlendirilmiş-vektör"><i class="fa fa-check"></i><b>5.4</b> İsimlendirilmiş vektör</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="listeler.html"><a href="listeler.html"><i class="fa fa-check"></i><b>6</b> Listeler</a><ul>
+<li class="chapter" data-level="6" data-path="listeler.html"><a href="listeler.html"><i class="fa fa-check"></i><b>6</b> Listeler</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="listeler.html"><a href="listeler.html#listele-indisleri"><i class="fa fa-check"></i><b>6.1</b> Listele indisleri</a></li>
-<li class="chapter" data-level="6.2" data-path="listeler.html"><a href="listeler.html#listeyi-vektore-donusturmek"><i class="fa fa-check"></i><b>6.2</b> Listeyi vektöre dönüştürmek</a></li>
-<li class="chapter" data-level="6.3" data-path="listeler.html"><a href="listeler.html#listelerde-aritmetik-islemler"><i class="fa fa-check"></i><b>6.3</b> Listelerde aritmetik işlemler</a></li>
-<li class="chapter" data-level="6.4" data-path="listeler.html"><a href="listeler.html#isimlendirilmis-liste"><i class="fa fa-check"></i><b>6.4</b> İsimlendirilmiş liste</a></li>
+<li class="chapter" data-level="6.2" data-path="listeler.html"><a href="listeler.html#listeyi-vektöre-dönüştürmek"><i class="fa fa-check"></i><b>6.2</b> Listeyi vektöre dönüştürmek</a></li>
+<li class="chapter" data-level="6.3" data-path="listeler.html"><a href="listeler.html#listelerde-aritmetik-işlemler"><i class="fa fa-check"></i><b>6.3</b> Listelerde aritmetik işlemler</a></li>
+<li class="chapter" data-level="6.4" data-path="listeler.html"><a href="listeler.html#isimlendirilmiş-liste"><i class="fa fa-check"></i><b>6.4</b> İsimlendirilmiş liste</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="matrisler.html"><a href="matrisler.html"><i class="fa fa-check"></i><b>7</b> Matrisler</a><ul>
-<li class="chapter" data-level="7.1" data-path="matrisler.html"><a href="matrisler.html#matris-boyutlar"><i class="fa fa-check"></i><b>7.1</b> Matris boyutları</a></li>
+<li class="chapter" data-level="7" data-path="matrisler.html"><a href="matrisler.html"><i class="fa fa-check"></i><b>7</b> Matrisler</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="matrisler.html"><a href="matrisler.html#matris-boyutları"><i class="fa fa-check"></i><b>7.1</b> Matris boyutları</a></li>
 <li class="chapter" data-level="7.2" data-path="matrisler.html"><a href="matrisler.html#matris-indisleri"><i class="fa fa-check"></i><b>7.2</b> Matris indisleri</a></li>
-<li class="chapter" data-level="7.3" data-path="matrisler.html"><a href="matrisler.html#aritmetik-islemler"><i class="fa fa-check"></i><b>7.3</b> Aritmetik işlemler</a></li>
+<li class="chapter" data-level="7.3" data-path="matrisler.html"><a href="matrisler.html#aritmetik-işlemler"><i class="fa fa-check"></i><b>7.3</b> Aritmetik işlemler</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -195,34 +209,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ilkadimlar" class="section level1">
+<div id="ilkadimlar" class="section level1" number="3">
 <h1><span class="header-section-number">Bölüm 3</span> İlk Adımlar</h1>
 <p>Her zaman kod yazmaya başlamadan önce, en önemli basamak çalıştığımız klasörün ne olduğunu bilmek, gerekirse değiştirmek.</p>
 <p>Hangi klasörde çalıştığımızı öğrenmek için <code>getwd()</code> fonksiyonunu kullanabiliriz (get working directory). Çalıştığımız klasörü belirlemek içinse <code>setwd()</code> fonksiyonu kullanılıyor:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getwd</span>()</code></pre>
-<pre><code>## [1] &quot;/Users/melike/Dropbox/githubbooks/R_Giris&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&#39;~/Desktop&#39;</span>)
-<span class="kw">getwd</span>()</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="ilkadimlar.html#cb6-1"></a><span class="kw">getwd</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;/Users/melike/GDrive/githubbooks/R_Giris&quot;</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="ilkadimlar.html#cb8-1"></a><span class="kw">setwd</span>(<span class="st">&#39;~/Desktop&#39;</span>)</span>
+<span id="cb8-2"><a href="ilkadimlar.html#cb8-2"></a><span class="kw">getwd</span>()</span></code></pre></div>
 <pre><code>## [1] &quot;/Users/melike/Desktop&quot;</code></pre>
 <p>Önerim, bilgisayarınızda R öğrenmek için bir klasör oluşturmanız ve kodunuzu, kullandığınız dosyaları vs. hep burada tutmanız. Aynı şekilde, belirli bir amaçla R kullandığınız zaman da masaüstüne rastgele isimlerle scriptleriniz kaydetmek yerine, düzenli bir şekilde uygun klasörleri içeriğe dair fikir veren isimlendirmelerle ya da belirli bir sistemle kaydetmeniz hayatınızı kolaylaştıracaktır.</p>
-<div id="hesap-makinesi-olarak-r" class="section level2">
+<div id="hesap-makinesi-olarak-r" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Hesap Makinesi olarak R</h2>
 <p>En temekde hesap makinesi işlemleri yapmak için kullanabilirsiniz:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span><span class="op">+</span><span class="dv">2</span></code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="ilkadimlar.html#cb10-1"></a><span class="dv">2</span><span class="op">+</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span><span class="op">*</span><span class="dv">3</span></code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="ilkadimlar.html#cb12-1"></a><span class="dv">2</span><span class="op">*</span><span class="dv">3</span></span></code></pre></div>
 <pre><code>## [1] 6</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">10-5</span></code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="ilkadimlar.html#cb14-1"></a><span class="dv">10-5</span></span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">3</span><span class="op">^</span><span class="dv">2</span></code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="ilkadimlar.html#cb16-1"></a><span class="dv">3</span><span class="op">^</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 9</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">450</span><span class="op">/</span><span class="dv">3</span></code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="ilkadimlar.html#cb18-1"></a><span class="dv">450</span><span class="op">/</span><span class="dv">3</span></span></code></pre></div>
 <pre><code>## [1] 150</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">200</span><span class="op">/</span><span class="dv">3</span></code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="ilkadimlar.html#cb20-1"></a><span class="dv">200</span><span class="op">/</span><span class="dv">3</span></span></code></pre></div>
 <pre><code>## [1] 66.66667</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">200</span><span class="op">%%</span><span class="dv">3</span></code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="ilkadimlar.html#cb22-1"></a><span class="dv">200</span><span class="op">%%</span><span class="dv">3</span></span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">200</span><span class="op">%/%</span><span class="dv">3</span></code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="ilkadimlar.html#cb24-1"></a><span class="dv">200</span><span class="op">%/%</span><span class="dv">3</span></span></code></pre></div>
 <pre><code>## [1] 66</code></pre>
 <p>Çok açık olmayan operatörler:</p>
 <ul>
@@ -230,49 +244,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>%/%</code> – tam sayı bölmesi, kalan olsa bile tam sayı olarak bölme işleminin sonucu</li>
 </ul>
 </div>
-<div id="fonksiyonlar" class="section level2">
+<div id="fonksiyonlar" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Fonksiyonlar</h2>
 <p>R kendi içinde fonksiyonlar barındırır. Örneğin, başlangıçta kullandığımız <code>getwd()</code> gibi. Farkettiysenz, fonksiyonlardan bahsederken hep parantez kullanıyorum. Fonksiyonları değişkenlerden ayırabileceğiniz en basit şekil bu. Çok basit bir kaç fonksiyona bakalım:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#10 tabaninda log</span>
-<span class="kw">log10</span>(<span class="dv">100</span>) </code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="ilkadimlar.html#cb26-1"></a><span class="co">#10 tabaninda log</span></span>
+<span id="cb26-2"><a href="ilkadimlar.html#cb26-2"></a><span class="kw">log10</span>(<span class="dv">100</span>) </span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#2 tabaninda log</span>
-<span class="kw">log2</span>(<span class="dv">100</span>)</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="ilkadimlar.html#cb28-1"></a><span class="co">#2 tabaninda log</span></span>
+<span id="cb28-2"><a href="ilkadimlar.html#cb28-2"></a><span class="kw">log2</span>(<span class="dv">100</span>)</span></code></pre></div>
 <pre><code>## [1] 6.643856</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#4 tabaninda 10un log&#39;u</span>
-<span class="kw">log</span>(<span class="dv">10</span>,<span class="dv">4</span>) </code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="ilkadimlar.html#cb30-1"></a><span class="co">#4 tabaninda 10un log&#39;u</span></span>
+<span id="cb30-2"><a href="ilkadimlar.html#cb30-2"></a><span class="kw">log</span>(<span class="dv">10</span>,<span class="dv">4</span>) </span></code></pre></div>
 <pre><code>## [1] 1.660964</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#e uzeri 1</span>
-<span class="kw">exp</span>(<span class="dv">1</span>) </code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="ilkadimlar.html#cb32-1"></a><span class="co">#e uzeri 1</span></span>
+<span id="cb32-2"><a href="ilkadimlar.html#cb32-2"></a><span class="kw">exp</span>(<span class="dv">1</span>) </span></code></pre></div>
 <pre><code>## [1] 2.718282</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># e uzeri 2</span>
-<span class="kw">exp</span>(<span class="dv">2</span>) </code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="ilkadimlar.html#cb34-1"></a><span class="co"># e uzeri 2</span></span>
+<span id="cb34-2"><a href="ilkadimlar.html#cb34-2"></a><span class="kw">exp</span>(<span class="dv">2</span>) </span></code></pre></div>
 <pre><code>## [1] 7.389056</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"> <span class="co"># e uzeri 2 nin ln i - log taban belirtilmediginde e tabaninda islem yapar</span>
-<span class="kw">log</span>(<span class="kw">exp</span>(<span class="dv">2</span>))</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="ilkadimlar.html#cb36-1"></a> <span class="co"># e uzeri 2 nin ln i - log taban belirtilmediginde e tabaninda islem yapar</span></span>
+<span id="cb36-2"><a href="ilkadimlar.html#cb36-2"></a><span class="kw">log</span>(<span class="kw">exp</span>(<span class="dv">2</span>))</span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 16 nin koku</span>
-<span class="dv">16</span><span class="op">^</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="ilkadimlar.html#cb38-1"></a><span class="co"># 16 nin koku</span></span>
+<span id="cb38-2"><a href="ilkadimlar.html#cb38-2"></a><span class="dv">16</span><span class="op">^</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ayni islem fonksiyon ile</span>
-<span class="kw">sqrt</span>(<span class="dv">16</span>) </code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="ilkadimlar.html#cb40-1"></a><span class="co"># ayni islem fonksiyon ile</span></span>
+<span id="cb40-2"><a href="ilkadimlar.html#cb40-2"></a><span class="kw">sqrt</span>(<span class="dv">16</span>) </span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
 </div>
-<div id="rda-degiskenler" class="section level2">
+<div id="rda-değişkenler" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> R’da değişkenler</h2>
 <p>Değişkenler, veri tutucular olarak düşünülebilir. R’da değişkene değer atamak icin <code>=</code> veya <code>&lt;-</code> operatörleri kullanılabilir. Örneğin x’e 3 değerini atamak için, aşağıdaki iki kod da geçerlidir.</p>
-<pre class="sourceCode r"><code class="sourceCode r">x =<span class="st"> </span><span class="dv">3</span>
-x</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="ilkadimlar.html#cb42-1"></a>x =<span class="st"> </span><span class="dv">3</span></span>
+<span id="cb42-2"><a href="ilkadimlar.html#cb42-2"></a>x</span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">4</span>
-a</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="ilkadimlar.html#cb44-1"></a>a &lt;-<span class="st"> </span><span class="dv">4</span></span>
+<span id="cb44-2"><a href="ilkadimlar.html#cb44-2"></a>a</span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">3</span> <span class="op">*</span><span class="st"> </span><span class="dv">4</span></code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="ilkadimlar.html#cb46-1"></a><span class="dv">3</span> <span class="op">*</span><span class="st"> </span><span class="dv">4</span></span></code></pre></div>
 <pre><code>## [1] 12</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">x <span class="op">*</span><span class="st"> </span>a</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="ilkadimlar.html#cb48-1"></a>x <span class="op">*</span><span class="st"> </span>a</span></code></pre></div>
 <pre><code>## [1] 12</code></pre>
 <p><code>&lt;-</code> tarihsel olarak R camiasında çokça kullanılsa da, pratik nedenlerle <code>=</code> kullanımı da oldukça yaygın ve yanlış değildir.</p>
-<div id="degisken-isimleri" class="section level3">
+<div id="değişken-isimleri" class="section level3" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> Değişken isimleri</h3>
 <p>R’da değişkenlere verebileceğimiz isimler için bazı sınırlayıcı kurallar vardır. Değişkenler, bir harf ile ya da harfin takip ettiği nokta ile başlar. Öğrneğin, <code>benimdegiskenim</code> geçerli bir değişken isim iken <code>2değisken</code> geçerli değildir, çünkü 2 bir harf değildir. <code>.degisken</code> geçerli bir değişken ismidir ancak <code>.2degisken</code> değildir. Ayrıca R’da kimi özel anlam içeren keilemerin değişken olarak kullanılması mümkün değildir, <code>ìf</code> ve <code>for</code> gibi. Bunları <code>?reserved</code> yazarak öğrenebilirsiniz.</p>
 <p>Yasak olmasa da diğer bir sorun R içinde varolan fonksiyonların isimleri ile değişken yaratmak. Çoğu zaman sorun olmadan çalışsa bile, karışıklığa sebep olduğu durumlar olabilir.</p>
@@ -288,16 +302,18 @@ a</code></pre>
         </div>
       </div>
 <a href="rstudio.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="temel-obje-turleri.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="temel-obje-türleri.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -305,12 +321,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -318,6 +333,14 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

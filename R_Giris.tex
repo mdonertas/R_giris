@@ -1,36 +1,46 @@
-\documentclass[]{book}
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{book}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-\else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-% use upquote if available, for straight quotes in verbatim environments
+% Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\usepackage[margin=1in]{geometry}
-\usepackage{hyperref}
-\hypersetup{unicode=true,
-            pdftitle={R'a Giriş},
-            pdfauthor={H. Melike Dönertaş},
-            pdfborder={0 0 0},
-            breaklinks=true}
-\urlstyle{same}  % don't use monospace font for urls
-\usepackage{natbib}
-\bibliographystyle{apalike}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={R'a Giriş},
+  pdfauthor={H. Melike Dönertaş},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -72,7 +82,15 @@
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
-\usepackage{graphicx,grffile}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -81,57 +99,25 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
-% Redefines (sub)paragraphs to behave more like sections
-\ifx\paragraph\undefined\else
-\let\oldparagraph\paragraph
-\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-\let\oldsubparagraph\subparagraph
-\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
-
-%%% Use protect on footnotes to avoid problems with footnotes in titles
-\let\rmarkdownfootnote\footnote%
-\def\footnote{\protect\rmarkdownfootnote}
-
-%%% Change title format to be more compact
-\usepackage{titling}
-
-% Create subtitle command for use in maketitle
-\newcommand{\subtitle}[1]{
-  \posttitle{
-    \begin{center}\large#1\end{center}
-    }
-}
-
-\setlength{\droptitle}{-2em}
-
-  \title{R'a Giriş}
-    \pretitle{\vspace{\droptitle}\centering\huge}
-  \posttitle{\par}
-    \author{H. Melike Dönertaş}
-    \preauthor{\centering\large\emph}
-  \postauthor{\par}
-      \predate{\centering\large\emph}
-  \postdate{\par}
-    \date{05-04-2019}
-
 \usepackage{booktabs}
 \renewcommand{\chaptermark}[1]{\markboth{{\chaptername\ \thechapter.\ #1}}{}}
 \renewcommand{\sectionmark}[1]{\markright{{\thesection.\ #1}}{}}
 \usepackage[turkish]{babel}
 \usepackage{float}
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
+
+\title{R'a Giriş}
+\author{H. Melike Dönertaş}
+\date{06-09-2020}
 
 \begin{document}
 \maketitle
@@ -144,9 +130,7 @@
 \chapter*{}\label{section}}
 \addcontentsline{toc}{chapter}{}
 
-Bu kitap oluşturulma aşamasında olup, haftalık olarak güncellenecek,
-yeni bölümler eklenecektir. Önerileriniz ve sorularınız için bana
-\href{mailto:donertas.melike@gmail.com}{email ile ulaşabilirsiniz}.
+Bu kitap oluşturulma aşamasında olup, haftalık olarak güncellenecek, yeni bölümler eklenecektir. Önerileriniz ve sorularınız için bana \href{mailto:donertas.melike@gmail.com}{email ile ulaşabilirsiniz}.
 
 \hypertarget{Giris}{%
 \chapter{Giriş}\label{Giris}}
@@ -154,22 +138,10 @@ yeni bölümler eklenecektir. Önerileriniz ve sorularınız için bana
 \hypertarget{r-nedir}{%
 \section{R nedir?}\label{r-nedir}}
 
-R ile ilgili şimdiye kadar en uygun bulduğum, en çok hoşuma giden
-benzetme Matthew Keller'a ait. Keller diyor ki: `R is like a magic,
-except you have functions instead of spells' - yani diyor ki R büyü
-gibidir, ancak büyülü sözcükler yerine fonksiyonlarınız vardır. SPSS,
-SAS kullanıcıları, `muggle' gibidir. Ortamı değiştirme kabiliyetleri
-sınırlıdır. Onların analizi için birileri tarafından uygun görülmüş
-dizayn edilmiş algoritmalarla sınırlıdırlar ve üstüne para ödemek
-zorundadırlar. Keller, R programcıları ise `büyücü'lere benzetiyor. R
-programcılar, alanında uzman olan kişiler tarafından yazılmış
-fonksiyonlara (yani büyülere) bağlı kalarak devam edebilecekleri gibi,
-kendi büyülerini de yaratabilirler ('sectumsempra' gibi lanetler de
-mümkün tabii). Bunları kullanmak / bunlara erişmek için para ödemezler,
-ve yeterinde deneyim kazandıklarında yapamayacakları bir şey yoktur.
+R ile ilgili şimdiye kadar en uygun bulduğum, en çok hoşuma giden benzetme Matthew Keller'a ait. Keller diyor ki: `R is like a magic, except you have functions instead of spells' - yani diyor ki R büyü gibidir, ancak büyülü sözcükler yerine fonksiyonlarınız vardır. SPSS, SAS kullanıcıları, `muggle' gibidir. Ortamı değiştirme kabiliyetleri sınırlıdır. Onların analizi için birileri tarafından uygun görülmüş dizayn edilmiş algoritmalarla sınırlıdırlar ve üstüne para ödemek zorundadırlar. Keller, R programcıları ise `büyücü'lere benzetiyor. R programcılar, alanında uzman olan kişiler tarafından yazılmış fonksiyonlara (yani büyülere) bağlı kalarak devam edebilecekleri gibi, kendi büyülerini de yaratabilirler ('sectumsempra' gibi lanetler de mümkün tabii). Bunları kullanmak / bunlara erişmek için para ödemezler, ve yeterinde deneyim kazandıklarında yapamayacakları bir şey yoktur.
 
-\hypertarget{r-avantajlar}{%
-\section{R Avantajları}\label{r-avantajlar}}
+\hypertarget{r-avantajlarux131}{%
+\section{R Avantajları}\label{r-avantajlarux131}}
 
 \begin{itemize}
 \tightlist
@@ -182,71 +154,35 @@ ve yeterinde deneyim kazandıklarında yapamayacakları bir şey yoktur.
 \item
   Güncel
 \item
-  Kod yazarken analiz hakkında düşünmeniz gerekiyor. Bu sebeple
-  yaptığınız analizin, deney düzeneğinize, örnekleminize ve en önemlisi
-  hipotezinize uygun olup olmadığını tartabiliyorsunuz. Rastgele tuşlara
-  tıklayıp p\textless{}0.05 görünce alıp devam etmekten oldukça farklı!
+  Kod yazarken analiz hakkında düşünmeniz gerekiyor. Bu sebeple yaptığınız analizin, deney düzeneğinize, örnekleminize ve en önemlisi hipotezinize uygun olup olmadığını tartabiliyorsunuz. Rastgele tuşlara tıklayıp p\textless0.05 görünce alıp devam etmekten oldukça farklı!
 \item
-  İstatistiksel testlerin varsayımlarına bağlı kalmadan, simülasyonlar
-  ile empirik dağılımlar yaratıp test yapabilirsiniz.
+  İstatistiksel testlerin varsayımlarına bağlı kalmadan, simülasyonlar ile empirik dağılımlar yaratıp test yapabilirsiniz.
 \item
-  R notebook / R markdown gibi dökümanlar oluşturarak analizinizi /
-  deneyinizi takip etmeyi ve yayınlamayı kolaylaştırmak ve tekrar
-  edilebilirliğini sağlamak mümkün.
+  R notebook / R markdown gibi dökümanlar oluşturarak analizinizi / deneyinizi takip etmeyi ve yayınlamayı kolaylaştırmak ve tekrar edilebilirliğini sağlamak mümkün.
 \item
-  Özellikle rutin olarak biyoistatistik / biyoenformatik
-  çalışmıyorsanız, Windows kullanıcısı olma ihtimaliniz yüksek. R
-  işletim sisteminden bağımsız olduğundan, kendi bilgisayarınızda
-  çalışabilir, ve gerektiğinde analizinizi / kodunuzu başka
-  platformlarda çalışanlarla rahatlıkla paylaşabilirsiniz.
+  Özellikle rutin olarak biyoistatistik / biyoenformatik çalışmıyorsanız, Windows kullanıcısı olma ihtimaliniz yüksek. R işletim sisteminden bağımsız olduğundan, kendi bilgisayarınızda çalışabilir, ve gerektiğinde analizinizi / kodunuzu başka platformlarda çalışanlarla rahatlıkla paylaşabilirsiniz.
 \item
-  Bilim dili günümüzde İngilizce imiş gibi gözüküyor. Ben buna
-  katılmıyorum. Bilimin dili bence grafikler. Yazdığınız 15 sayfalık bir
-  makaleyi özetleyebilecek 3 grafik yapabilmek çok büyük bir güç (büyük
-  konuştum, tabii her şeyi grafikleştirmek mümkün değil ama zamanla
-  makaleleri okurken farketmeye başlıyor insan Excel, Graph Pad
-  grafiklerinin R'da oluşturulmuş grafikler yanında nasıl
-  kaldığını\ldots{})
+  Bilim dili günümüzde İngilizce imiş gibi gözüküyor. Ben buna katılmıyorum. Bilimin dili bence grafikler. Yazdığınız 15 sayfalık bir makaleyi özetleyebilecek 3 grafik yapabilmek çok büyük bir güç (büyük konuştum, tabii her şeyi grafikleştirmek mümkün değil ama zamanla makaleleri okurken farketmeye başlıyor insan Excel, Graph Pad grafiklerinin R'da oluşturulmuş grafikler yanında nasıl kaldığını\ldots)
 \item
-  Bir de öğrenmesi en kolay dillerden birisi. Ancak bunun yanında
-  öğrenme eğrisi lineer değil. Yani ilk zamanlar çok zor gelebilir (ilk
-  zamanlar çok basit olmasına rağmen kaç defa matrisin satırı yerine
-  sütunu ile işlem yapmaya çalıştığımı anlatamam bile!) ama alıştıktan
-  sonra insanın kendisini geliştirmesi, yeni fonksiyon hatta
-  başkalarının kullanımı için paket yazmak diğer dillere göre çok daha
-  kolay.
+  Bir de öğrenmesi en kolay dillerden birisi. Ancak bunun yanında öğrenme eğrisi lineer değil. Yani ilk zamanlar çok zor gelebilir (ilk zamanlar çok basit olmasına rağmen kaç defa matrisin satırı yerine sütunu ile işlem yapmaya çalıştığımı anlatamam bile!) ama alıştıktan sonra insanın kendisini geliştirmesi, yeni fonksiyon hatta başkalarının kullanımı için paket yazmak diğer dillere göre çok daha kolay.
 \item
-  Son olarak, R paket sayısı, paketlerin güncellenme sıklığı, paket
-  yazarlarının ulaşılabilirliği açısından özellikle biyoloji alanında
-  çalışanlar açısından çok avantajlı. \texttt{Bioconductor} projesi
-  özellikle biyoloji ile alakalı analizler için -omics data analizi için
-  vs.~inanılmaz avantaj sağlıyor.
+  Son olarak, R paket sayısı, paketlerin güncellenme sıklığı, paket yazarlarının ulaşılabilirliği açısından özellikle biyoloji alanında çalışanlar açısından çok avantajlı. \texttt{Bioconductor} projesi özellikle biyoloji ile alakalı analizler için -omics data analizi için vs.~inanılmaz avantaj sağlıyor.
 \end{itemize}
 
-\hypertarget{r-ogrenmeye-nasl-baslarm}{%
-\section{R Öğrenmeye Nasıl Başlarım?}\label{r-ogrenmeye-nasl-baslarm}}
+\hypertarget{r-uxf6ux11frenmeye-nasux131l-baux15flarux131m}{%
+\section{R Öğrenmeye Nasıl Başlarım?}\label{r-uxf6ux11frenmeye-nasux131l-baux15flarux131m}}
 
-Bu sorunun tabii ki kesin net bir cevabı yok, kişiden kişiye,
-kullanımdan kullanıma farklılık gösterecektir en verimli yol. Ama yine
-de bir takım basamaklardan geçmemek imkansız (R'ı bilgisayarınıza
-indirmek ve kurmak gibi!). İlk olarak bu `mutlaka olması gereken
-maddeler' ve yararlı bulduğum kimi basamakları sıralayalım.
+Bu sorunun tabii ki kesin net bir cevabı yok, kişiden kişiye, kullanımdan kullanıma farklılık gösterecektir en verimli yol. Ama yine de bir takım basamaklardan geçmemek imkansız (R'ı bilgisayarınıza indirmek ve kurmak gibi!). İlk olarak bu `mutlaka olması gereken maddeler' ve yararlı bulduğum kimi basamakları sıralayalım.
 
 \hypertarget{r-kurulumu}{%
 \subsection{R kurulumu}\label{r-kurulumu}}
 
-Çok basit: \href{https://cran.r-project.org}{CRAN Anasayfası}na gidip,
-kullandığımız işletim sistemi için olan versiyonu indiriyoruz. Bir çok
-kullanıcı için `base' sürümü yeterli olacaktır. Sonrasında talimatları
-takip ederek R'ı kuruyoruz.
+Çok basit: \href{https://cran.r-project.org}{CRAN Anasayfası}na gidip, kullandığımız işletim sistemi için olan versiyonu indiriyoruz. Bir çok kullanıcı için `base' sürümü yeterli olacaktır. Sonrasında talimatları takip ederek R'ı kuruyoruz.
 
 \hypertarget{rstudio}{%
 \subsection{RStudio}\label{rstudio}}
 
-R'ın kendi arayüzü oldukça sade ve yeterli olsa da, ben herkese
-\href{https://www.rstudio.com/}{RStudio}'yu indirmelerini tavsiye
-ediyorum. RStudio da ücretsiz ve R programlama için bir çeşit arayüz
-gibi düşünebilirsiniz.
+R'ın kendi arayüzü oldukça sade ve yeterli olsa da, ben herkese \href{https://www.rstudio.com/}{RStudio}'yu indirmelerini tavsiye ediyorum. RStudio da ücretsiz ve R programlama için bir çeşit arayüz gibi düşünebilirsiniz.
 
 \hypertarget{kaynaklar}{%
 \subsection{Kaynaklar}\label{kaynaklar}}
@@ -257,11 +193,9 @@ gibi düşünebilirsiniz.
 \begin{itemize}
 \tightlist
 \item
-  \href{https://www.edx.org/course/statistics-r-harvardx-ph525-1x-1}{EdX
-  - Statistics and R dersi} ve ogrendikten sonra~dersin devami
+  \href{https://www.edx.org/course/statistics-r-harvardx-ph525-1x-1}{EdX - Statistics and R dersi} ve ogrendikten sonra~dersin devami
 \item
-  \href{https://www.coursera.org/learn/r-programming}{Coursera - R
-  Programming dersi}
+  \href{https://www.coursera.org/learn/r-programming}{Coursera - R Programming dersi}
 \item
   \href{https://swirlstats.com/}{R'ı R içinde öğrenin - swirl paketi}
 \end{itemize}
@@ -281,8 +215,7 @@ gibi düşünebilirsiniz.
 \begin{itemize}
 \tightlist
 \item
-  \href{http://www.cookbook-r.com/Graphs/}{R Graphics Cookbook - ggplot
-  and more}
+  \href{http://www.cookbook-r.com/Graphs/}{R Graphics Cookbook - ggplot and more}
 \end{itemize}
 
 \hypertarget{rstudio}{%
@@ -296,17 +229,12 @@ gibi düşünebilirsiniz.
 
 İlk olarak çalışacağımız ortamı tanıyalım.
 
-RStudio'yu açtığınızda `RStudio Arayüzü' resmine çok benzer bir tablo
-ile karşılacaksınız - belki 4. kısım hariç, oraya geleceğiz. Arkaplan
-muhtemelen beyazdır ve belki işletim sistemi farkları söz konusudur. Ama
-yine de bu ekran aşağı yukarı neresı ne işe yarıyor, kodu nereye
-yazacağız gibi kısa bir giriş yapmak için yeterli olacaktır.
+RStudio'yu açtığınızda `RStudio Arayüzü' resmine çok benzer bir tablo ile karşılacaksınız - belki 4. kısım hariç, oraya geleceğiz. Arkaplan muhtemelen beyazdır ve belki işletim sistemi farkları söz konusudur. Ama yine de bu ekran aşağı yukarı neresı ne işe yarıyor, kodu nereye yazacağız gibi kısa bir giriş yapmak için yeterli olacaktır.
 
 \hypertarget{konsol-terminal-1}{%
 \section{Konsol, Terminal (1)}\label{konsol-terminal-1}}
 
-\textbf{Konsol (Console)}: Burası kodu yazıp sonuçları gördüğümüz kısım.
-Denemek için \texttt{2+2} yazıp enter'a basalım.
+\textbf{Konsol (Console)}: Burası kodu yazıp sonuçları gördüğümüz kısım. Denemek için \texttt{2+2} yazıp enter'a basalım.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -318,21 +246,14 @@ Denemek için \texttt{2+2} yazıp enter'a basalım.
 ## [1] 4
 \end{verbatim}
 
-\textbf{Terminal}: Burası da bilgisayarınızın terminali veya komut
-istemcisine erişim sağlayan bir kısım. RStudio'nun eski versiyonlarında
-bu özellik yoktu ancak yeni versiyon kullanıyorsanız bu sekme de mevcut
-olacaktır.
+\textbf{Terminal}: Burası da bilgisayarınızın terminali veya komut istemcisine erişim sağlayan bir kısım. RStudio'nun eski versiyonlarında bu özellik yoktu ancak yeni versiyon kullanıyorsanız bu sekme de mevcut olacaktır.
 
-\hypertarget{dosyalar-cizimler-paketler-yardm-2}{%
-\section{Dosyalar, Çizimler, Paketler, Yardım
-(2)}\label{dosyalar-cizimler-paketler-yardm-2}}
+\hypertarget{dosyalar-uxe7izimler-paketler-yardux131m-2}{%
+\section{Dosyalar, Çizimler, Paketler, Yardım (2)}\label{dosyalar-uxe7izimler-paketler-yardux131m-2}}
 
-\textbf{Dosyalar (Files)}: İçinde bulunduğumuz klasörün içindeki
-dosyaları listeliyor.
+\textbf{Dosyalar (Files)}: İçinde bulunduğumuz klasörün içindeki dosyaları listeliyor.
 
-\textbf{Çizimler (Plots)}: Çizdiğimiz grafikleri görüntüleyebileceğimiz
-kısım. Örneğin şu kodu konsola yazarak bu sekmenin işlevini
-gözlemleyebiliriz:
+\textbf{Çizimler (Plots)}: Çizdiğimiz grafikleri görüntüleyebileceğimiz kısım. Örneğin şu kodu konsola yazarak bu sekmenin işlevini gözlemleyebiliriz:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -343,25 +264,14 @@ gözlemleyebiliriz:
 \begin{figure}
 \centering
 \includegraphics{R_Giris_files/figure-latex/inithist-1.pdf}
-\caption{\label{fig:inithist}1000 rastgele değer kullanılarak çizilmiş bir
-histogram}
+\caption{\label{fig:inithist}1000 rastgele değer kullanılarak çizilmiş bir histogram}
 \end{figure}
 
-Bu ekranda büyütme, dışarı aktarma (export) gibi seçenekleri de
-görüyoruz. Ancak grafikleri kaydetmek için bu dışarı aktarma seçeneğini
-kullanmamayı, kaydetme işlemini de tamamen kod ile yapmayı tavsiye
-ediyorum.
+Bu ekranda büyütme, dışarı aktarma (export) gibi seçenekleri de görüyoruz. Ancak grafikleri kaydetmek için bu dışarı aktarma seçeneğini kullanmamayı, kaydetme işlemini de tamamen kod ile yapmayı tavsiye ediyorum.
 
-\textbf{Paketler (Packages)}: R'da yüklü olan çeşitli paketleri
-(kütüphaneleri) görüyoruz. Ancak buradan R ortamımıza yükleme
-yapmaktansa \texttt{library()} komutunu kullanmalıyız ki yazdığımız
-kodlar daha sonra hem biz hem başkaları tarafından kolaylıkla
-çalıştırılabilsin. Bu kısma sonra geleceğim.
+\textbf{Paketler (Packages)}: R'da yüklü olan çeşitli paketleri (kütüphaneleri) görüyoruz. Ancak buradan R ortamımıza yükleme yapmaktansa \texttt{library()} komutunu kullanmalıyız ki yazdığımız kodlar daha sonra hem biz hem başkaları tarafından kolaylıkla çalıştırılabilsin. Bu kısma sonra geleceğim.
 
-\textbf{Yardım (Help)}: Bu sekme RStudio'daki en büyük dostumuz. Açıp
-öğrenme linklerini kurcalamak iyi bir başlangıç. Ayrıca \texttt{?}
-operatörü ile burada fonksiyonların yardım sayfalarını
-görüntüleyebiliriz, örneğin konsolda şu kodu deneyelim:
+\textbf{Yardım (Help)}: Bu sekme RStudio'daki en büyük dostumuz. Açıp öğrenme linklerini kurcalamak iyi bir başlangıç. Ayrıca \texttt{?} operatörü ile burada fonksiyonların yardım sayfalarını görüntüleyebiliriz, örneğin konsolda şu kodu deneyelim:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -369,85 +279,38 @@ görüntüleyebiliriz, örneğin konsolda şu kodu deneyelim:
 \end{Highlighting}
 \end{Shaded}
 
-Gördüğünüz gibi, yardım sekmesinde az önce histogram çizmek için
-kullandığınız \texttt{hist()} fonksiyonu için yardım ekranı açıldı. Bu
-ekranda, fonksiyonun tanımı, argümanları, sonucu hakkında bilgi
-alabiliyor ve en altta örnekleri görüyorsunuz. Örnekleri çalıştırıp,
-fonksiyonla ilgili daha fazla bilgi sahibi olabilirsiniz. Burada çıkan
-bilgiler, R'ı yüklediğimizde gelen `base R' fonksiyonları için epey
-detaylı. İndireceğiniz bir çok paket için de detaylı bilgi
-bulabilirsiniz ancak detay ve örnek miktarı paket yazarlarının
-oluşturduğu yardım dosyalarına bağlı olan bir şey.
+Gördüğünüz gibi, yardım sekmesinde az önce histogram çizmek için kullandığınız \texttt{hist()} fonksiyonu için yardım ekranı açıldı. Bu ekranda, fonksiyonun tanımı, argümanları, sonucu hakkında bilgi alabiliyor ve en altta örnekleri görüyorsunuz. Örnekleri çalıştırıp, fonksiyonla ilgili daha fazla bilgi sahibi olabilirsiniz. Burada çıkan bilgiler, R'ı yüklediğimizde gelen `base R' fonksiyonları için epey detaylı. İndireceğiniz bir çok paket için de detaylı bilgi bulabilirsiniz ancak detay ve örnek miktarı paket yazarlarının oluşturduğu yardım dosyalarına bağlı olan bir şey.
 
-\hypertarget{ortam-gecmis-3}{%
-\section{Ortam, Geçmiş (3)}\label{ortam-gecmis-3}}
+\hypertarget{ortam-geuxe7miux15f-3}{%
+\section{Ortam, Geçmiş (3)}\label{ortam-geuxe7miux15f-3}}
 
-\textbf{Ortam (Environment)}: Oluşturduğumuz değişkenlerin listesini ve
-bilgilerini burada görebiliriz. Şunu deneyelim:
+\textbf{Ortam (Environment)}: Oluşturduğumuz değişkenlerin listesini ve bilgilerini burada görebiliriz. Şunu deneyelim:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x <-}\StringTok{ }\DecValTok{3}
+\NormalTok{x <{-}}\StringTok{ }\DecValTok{3}
 \end{Highlighting}
 \end{Shaded}
 
-Bu kod ile, x isimli değişkene, 3 değerini vermiş olduk. Artık sadece x
-yazıp enter'a basarsanız, x'in 3 olduğunu göreceksiniz. Aynı zamanda
-ortam sekmesinde artık x'in de listelendiğini görebilirsiniz.
+Bu kod ile, x isimli değişkene, 3 değerini vermiş olduk. Artık sadece x yazıp enter'a basarsanız, x'in 3 olduğunu göreceksiniz. Aynı zamanda ortam sekmesinde artık x'in de listelendiğini görebilirsiniz.
 
-\textbf{Geçmiş (History)}: Mevcut R oturumunuzda yazdığınız kodları
-listeleyen bir kısım. Buradan önceden çalıştırdığınız kodları
-görebilirsiniz. Ancak daha pratik, daha çok kullanılan bir kısa yol,
-konsolda iken klavyedeki yukarı ok tuşu ile önceki kodları tekrar
-çağırmak. Geçmiş sadece açık oturumdaki kodları kaydediyor olsa da,
-.Rhistory dosyası sayesinde ortamlar arası geçmiş bilgisini
-aktarabilirsiniz. Yine de buna bağlı kalmak yerine daha sonra tekrar
-kullanacağımız kodları .R scripti olarak kaydetmek çok daha elverişli
-olacaktır.
+\textbf{Geçmiş (History)}: Mevcut R oturumunuzda yazdığınız kodları listeleyen bir kısım. Buradan önceden çalıştırdığınız kodları görebilirsiniz. Ancak daha pratik, daha çok kullanılan bir kısa yol, konsolda iken klavyedeki yukarı ok tuşu ile önceki kodları tekrar çağırmak. Geçmiş sadece açık oturumdaki kodları kaydediyor olsa da, .Rhistory dosyası sayesinde ortamlar arası geçmiş bilgisini aktarabilirsiniz. Yine de buna bağlı kalmak yerine daha sonra tekrar kullanacağımız kodları .R scripti olarak kaydetmek çok daha elverişli olacaktır.
 
-\hypertarget{editor-4}{%
-\section{Editör (4)}\label{editor-4}}
+\hypertarget{edituxf6r-4}{%
+\section{Editör (4)}\label{edituxf6r-4}}
 
-Editör ekranı, kodlarımızı yazıp çalıştırabileceğimiz ve sonrası için
-yorumlarımızla beraber kaydedebileceğimiz ekran. Bu bölüm muhtemelen
-açık olarak başlamamıştır RStudio. Burayı açmak için, sol üst köşedeki
-tuş ile yeni `R script'i açabilirsiniz. Burada başka seçenekler de var,
-bunların ne olduğu avantajşarı hakkında sonrasında kısımlar gelecek.
-Şimdilik 'R script'ini seçelim. Açtığınız zaman, görüntüdeki gibi boş
-bir bölüm çıkacak. Önerim kodlarınızı her zaman konsol yerine burada
-yazmanız. RStudio'nun güzel bir özelliği burada yazdığını kodu konsolda
-kolay bir şekilde çalıştırmanızı sağlıyor, kopyala yapıştır yapmanıza
-gerek yok. Şimdi bu ekranda 2+2 yazıp, enter'a basalım. Konsolda hiç bir
-şey olmadığını göreceksiniz. Şimdi tekrar 2+2 nin olduğu satıra dönüp
-Ctrl+Enter (Mac kullanıyorsanız Cmd+Enter)'a basın. Konsolda hem kodun
-çalıştırıldığını hem de sonucun burada görüntülendiğini göreceksiniz
-(Eğer olmadıysa R Scripti seçeneğini seçmemiş olabilirsiniz). Her
-çalışma sonunda bu dosyayı kaydederseniz (Ctrl+S ya da Cmd+S), daha
-sonra yazdığınız kodlara tekrar dönme şansınız olacaktır. Daha önemlisi,
-buraya yazdığınız kodların içinden hatalı olanları silebilir
-düzenleyebilirsiniz bu sayede sadece işlevsel kodlarınız kaydolur.
-Geleneksel olarak scriptlerin uzantıları'.R'dır.
+Editör ekranı, kodlarımızı yazıp çalıştırabileceğimiz ve sonrası için yorumlarımızla beraber kaydedebileceğimiz ekran. Bu bölüm muhtemelen açık olarak başlamamıştır RStudio. Burayı açmak için, sol üst köşedeki tuş ile yeni `R script'i açabilirsiniz. Burada başka seçenekler de var, bunların ne olduğu avantajşarı hakkında sonrasında kısımlar gelecek. Şimdilik 'R script'ini seçelim. Açtığınız zaman, görüntüdeki gibi boş bir bölüm çıkacak. Önerim kodlarınızı her zaman konsol yerine burada yazmanız. RStudio'nun güzel bir özelliği burada yazdığını kodu konsolda kolay bir şekilde çalıştırmanızı sağlıyor, kopyala yapıştır yapmanıza gerek yok. Şimdi bu ekranda 2+2 yazıp, enter'a basalım. Konsolda hiç bir şey olmadığını göreceksiniz. Şimdi tekrar 2+2 nin olduğu satıra dönüp Ctrl+Enter (Mac kullanıyorsanız Cmd+Enter)'a basın. Konsolda hem kodun çalıştırıldığını hem de sonucun burada görüntülendiğini göreceksiniz (Eğer olmadıysa R Scripti seçeneğini seçmemiş olabilirsiniz). Her çalışma sonunda bu dosyayı kaydederseniz (Ctrl+S ya da Cmd+S), daha sonra yazdığınız kodlara tekrar dönme şansınız olacaktır. Daha önemlisi, buraya yazdığınız kodların içinden hatalı olanları silebilir düzenleyebilirsiniz bu sayede sadece işlevsel kodlarınız kaydolur. Geleneksel olarak scriptlerin uzantıları'.R'dır.
 
-Bu açıkladığım panellerin yeri, sırası ve açık olup olmayacağı
-seçeneklerden değiştirilebilir.
+Bu açıkladığım panellerin yeri, sırası ve açık olup olmayacağı seçeneklerden değiştirilebilir.
 
-Son olarak, RStudio'yu kapatırken size 'workspace'i kaydetmek isteyip
-istemediğinizi soracaktır. Buna benim önerim her zaman hayır demeniz,
-hatta seçeneklerden bunu varsayılan olarak ayarlayıp asla kaydetmemeniz.
-Objeleri ayrıca istediğimiz şekilde nasıl kaydedeceğimizi ilerde
-göreceğiz. Yine aynı şekilde history kaydetmek yerine scriptinizi
-kaydetmenizi ya da history kaydetseniz bile ayrıca mutlaka scriptinizi
-kaydetmenizi öneririm.
+Son olarak, RStudio'yu kapatırken size 'workspace'i kaydetmek isteyip istemediğinizi soracaktır. Buna benim önerim her zaman hayır demeniz, hatta seçeneklerden bunu varsayılan olarak ayarlayıp asla kaydetmemeniz. Objeleri ayrıca istediğimiz şekilde nasıl kaydedeceğimizi ilerde göreceğiz. Yine aynı şekilde history kaydetmek yerine scriptinizi kaydetmenizi ya da history kaydetseniz bile ayrıca mutlaka scriptinizi kaydetmenizi öneririm.
 
 \hypertarget{ilkadimlar}{%
 \chapter{İlk Adımlar}\label{ilkadimlar}}
 
-Her zaman kod yazmaya başlamadan önce, en önemli basamak çalıştığımız
-klasörün ne olduğunu bilmek, gerekirse değiştirmek.
+Her zaman kod yazmaya başlamadan önce, en önemli basamak çalıştığımız klasörün ne olduğunu bilmek, gerekirse değiştirmek.
 
-Hangi klasörde çalıştığımızı öğrenmek için \texttt{getwd()} fonksiyonunu
-kullanabiliriz (get working directory). Çalıştığımız klasörü belirlemek
-içinse \texttt{setwd()} fonksiyonu kullanılıyor:
+Hangi klasörde çalıştığımızı öğrenmek için \texttt{getwd()} fonksiyonunu kullanabiliriz (get working directory). Çalıştığımız klasörü belirlemek içinse \texttt{setwd()} fonksiyonu kullanılıyor:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -456,12 +319,12 @@ içinse \texttt{setwd()} fonksiyonu kullanılıyor:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "/Users/melike/Dropbox/githubbooks/R_Giris"
+## [1] "/Users/melike/GDrive/githubbooks/R_Giris"
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{setwd}\NormalTok{(}\StringTok{'~/Desktop'}\NormalTok{)}
+\KeywordTok{setwd}\NormalTok{(}\StringTok{\textquotesingle{}\textasciitilde{}/Desktop\textquotesingle{}}\NormalTok{)}
 \KeywordTok{getwd}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -470,12 +333,7 @@ içinse \texttt{setwd()} fonksiyonu kullanılıyor:
 ## [1] "/Users/melike/Desktop"
 \end{verbatim}
 
-Önerim, bilgisayarınızda R öğrenmek için bir klasör oluşturmanız ve
-kodunuzu, kullandığınız dosyaları vs.~hep burada tutmanız. Aynı şekilde,
-belirli bir amaçla R kullandığınız zaman da masaüstüne rastgele
-isimlerle scriptleriniz kaydetmek yerine, düzenli bir şekilde uygun
-klasörleri içeriğe dair fikir veren isimlendirmelerle ya da belirli bir
-sistemle kaydetmeniz hayatınızı kolaylaştıracaktır.
+Önerim, bilgisayarınızda R öğrenmek için bir klasör oluşturmanız ve kodunuzu, kullandığınız dosyaları vs.~hep burada tutmanız. Aynı şekilde, belirli bir amaçla R kullandığınız zaman da masaüstüne rastgele isimlerle scriptleriniz kaydetmek yerine, düzenli bir şekilde uygun klasörleri içeriğe dair fikir veren isimlendirmelerle ya da belirli bir sistemle kaydetmeniz hayatınızı kolaylaştıracaktır.
 
 \hypertarget{hesap-makinesi-olarak-r}{%
 \section{Hesap Makinesi olarak R}\label{hesap-makinesi-olarak-r}}
@@ -504,7 +362,7 @@ En temekde hesap makinesi işlemleri yapmak için kullanabilirsiniz:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{10-5}
+\DecValTok{10{-}5}
 \end{Highlighting}
 \end{Shaded}
 
@@ -514,7 +372,7 @@ En temekde hesap makinesi işlemleri yapmak için kullanabilirsiniz:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{3}\OperatorTok{^}\DecValTok{2}
+\DecValTok{3}\OperatorTok{\^{}}\DecValTok{2}
 \end{Highlighting}
 \end{Shaded}
 
@@ -544,7 +402,7 @@ En temekde hesap makinesi işlemleri yapmak için kullanabilirsiniz:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{200}\OperatorTok{%%}\DecValTok{3}
+\DecValTok{200}\OperatorTok{\%\%}\DecValTok{3}
 \end{Highlighting}
 \end{Shaded}
 
@@ -554,7 +412,7 @@ En temekde hesap makinesi işlemleri yapmak için kullanabilirsiniz:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{200}\OperatorTok{%/%}\DecValTok{3}
+\DecValTok{200}\OperatorTok{\%/\%}\DecValTok{3}
 \end{Highlighting}
 \end{Shaded}
 
@@ -567,25 +425,19 @@ En temekde hesap makinesi işlemleri yapmak için kullanabilirsiniz:
 \begin{itemize}
 \tightlist
 \item
-  \texttt{\%\%}-- belirli bir tabanda kalan işlemi, modüler aritmetik.
-  Örneğimizde 200ün 3e bölümünden kalan 2
+  \texttt{\%\%}-- belirli bir tabanda kalan işlemi, modüler aritmetik. Örneğimizde 200ün 3e bölümünden kalan 2
 \item
-  \texttt{\%/\%} -- tam sayı bölmesi, kalan olsa bile tam sayı olarak
-  bölme işleminin sonucu
+  \texttt{\%/\%} -- tam sayı bölmesi, kalan olsa bile tam sayı olarak bölme işleminin sonucu
 \end{itemize}
 
 \hypertarget{fonksiyonlar}{%
 \section{Fonksiyonlar}\label{fonksiyonlar}}
 
-R kendi içinde fonksiyonlar barındırır. Örneğin, başlangıçta
-kullandığımız \texttt{getwd()} gibi. Farkettiysenz, fonksiyonlardan
-bahsederken hep parantez kullanıyorum. Fonksiyonları değişkenlerden
-ayırabileceğiniz en basit şekil bu. Çok basit bir kaç fonksiyona
-bakalım:
+R kendi içinde fonksiyonlar barındırır. Örneğin, başlangıçta kullandığımız \texttt{getwd()} gibi. Farkettiysenz, fonksiyonlardan bahsederken hep parantez kullanıyorum. Fonksiyonları değişkenlerden ayırabileceğiniz en basit şekil bu. Çok basit bir kaç fonksiyona bakalım:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{#10 tabaninda log}
+\CommentTok{\#10 tabaninda log}
 \KeywordTok{log10}\NormalTok{(}\DecValTok{100}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
@@ -596,7 +448,7 @@ bakalım:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{#2 tabaninda log}
+\CommentTok{\#2 tabaninda log}
 \KeywordTok{log2}\NormalTok{(}\DecValTok{100}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -607,7 +459,7 @@ bakalım:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{#4 tabaninda 10un log'u}
+\CommentTok{\#4 tabaninda 10un log\textquotesingle{}u}
 \KeywordTok{log}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{4}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
@@ -618,7 +470,7 @@ bakalım:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{#e uzeri 1}
+\CommentTok{\#e uzeri 1}
 \KeywordTok{exp}\NormalTok{(}\DecValTok{1}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
@@ -629,7 +481,7 @@ bakalım:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# e uzeri 2}
+\CommentTok{\# e uzeri 2}
 \KeywordTok{exp}\NormalTok{(}\DecValTok{2}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
@@ -640,7 +492,7 @@ bakalım:
 
 \begin{Shaded}
 \begin{Highlighting}[]
- \CommentTok{# e uzeri 2 nin ln i - log taban belirtilmediginde e tabaninda islem yapar}
+ \CommentTok{\# e uzeri 2 nin ln i {-} log taban belirtilmediginde e tabaninda islem yapar}
 \KeywordTok{log}\NormalTok{(}\KeywordTok{exp}\NormalTok{(}\DecValTok{2}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
@@ -651,8 +503,8 @@ bakalım:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# 16 nin koku}
-\DecValTok{16}\OperatorTok{^}\NormalTok{(}\DecValTok{1}\OperatorTok{/}\DecValTok{2}\NormalTok{)}
+\CommentTok{\# 16 nin koku}
+\DecValTok{16}\OperatorTok{\^{}}\NormalTok{(}\DecValTok{1}\OperatorTok{/}\DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -662,7 +514,7 @@ bakalım:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# ayni islem fonksiyon ile}
+\CommentTok{\# ayni islem fonksiyon ile}
 \KeywordTok{sqrt}\NormalTok{(}\DecValTok{16}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
@@ -671,13 +523,10 @@ bakalım:
 ## [1] 4
 \end{verbatim}
 
-\hypertarget{rda-degiskenler}{%
-\section{R'da değişkenler}\label{rda-degiskenler}}
+\hypertarget{rda-deux11fiux15fkenler}{%
+\section{R'da değişkenler}\label{rda-deux11fiux15fkenler}}
 
-Değişkenler, veri tutucular olarak düşünülebilir. R'da değişkene değer
-atamak icin \texttt{=} veya \texttt{\textless{}-} operatörleri
-kullanılabilir. Örneğin x'e 3 değerini atamak için, aşağıdaki iki kod da
-geçerlidir.
+Değişkenler, veri tutucular olarak düşünülebilir. R'da değişkene değer atamak icin \texttt{=} veya \texttt{\textless{}-} operatörleri kullanılabilir. Örneğin x'e 3 değerini atamak için, aşağıdaki iki kod da geçerlidir.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -692,7 +541,7 @@ geçerlidir.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{a <-}\StringTok{ }\DecValTok{4}
+\NormalTok{a <{-}}\StringTok{ }\DecValTok{4}
 \NormalTok{a}
 \end{Highlighting}
 \end{Shaded}
@@ -721,32 +570,21 @@ geçerlidir.
 ## [1] 12
 \end{verbatim}
 
-\texttt{\textless{}-} tarihsel olarak R camiasında çokça kullanılsa da,
-pratik nedenlerle \texttt{=} kullanımı da oldukça yaygın ve yanlış
-değildir.
+\texttt{\textless{}-} tarihsel olarak R camiasında çokça kullanılsa da, pratik nedenlerle \texttt{=} kullanımı da oldukça yaygın ve yanlış değildir.
 
-\hypertarget{degisken-isimleri}{%
-\subsection{Değişken isimleri}\label{degisken-isimleri}}
+\hypertarget{deux11fiux15fken-isimleri}{%
+\subsection{Değişken isimleri}\label{deux11fiux15fken-isimleri}}
 
-R'da değişkenlere verebileceğimiz isimler için bazı sınırlayıcı kurallar
-vardır. Değişkenler, bir harf ile ya da harfin takip ettiği nokta ile
-başlar. Öğrneğin, \texttt{benimdegiskenim} geçerli bir değişken isim
-iken \texttt{2değisken} geçerli değildir, çünkü 2 bir harf değildir.
-\texttt{.degisken} geçerli bir değişken ismidir ancak
-\texttt{.2degisken} değildir. Ayrıca R'da kimi özel anlam içeren
-keilemerin değişken olarak kullanılması mümkün değildir, \texttt{ìf} ve
-\texttt{for} gibi. Bunları \texttt{?reserved} yazarak öğrenebilirsiniz.
+R'da değişkenlere verebileceğimiz isimler için bazı sınırlayıcı kurallar vardır. Değişkenler, bir harf ile ya da harfin takip ettiği nokta ile başlar. Öğrneğin, \texttt{benimdegiskenim} geçerli bir değişken isim iken \texttt{2değisken} geçerli değildir, çünkü 2 bir harf değildir. \texttt{.degisken} geçerli bir değişken ismidir ancak \texttt{.2degisken} değildir. Ayrıca R'da kimi özel anlam içeren keilemerin değişken olarak kullanılması mümkün değildir, \texttt{ìf} ve \texttt{for} gibi. Bunları \texttt{?reserved} yazarak öğrenebilirsiniz.
 
-Yasak olmasa da diğer bir sorun R içinde varolan fonksiyonların isimleri
-ile değişken yaratmak. Çoğu zaman sorun olmadan çalışsa bile,
-karışıklığa sebep olduğu durumlar olabilir.
+Yasak olmasa da diğer bir sorun R içinde varolan fonksiyonların isimleri ile değişken yaratmak. Çoğu zaman sorun olmadan çalışsa bile, karışıklığa sebep olduğu durumlar olabilir.
 
 R'da değişken isimleri küçük / büyük harfe duyarlıdır.
 
 Değişken isimlerini tuttuğu veriyle alakalı seçmek kolaylık sağlar.
 
-\hypertarget{temel-obje-turleri}{%
-\chapter{Temel obje türleri}\label{temel-obje-turleri}}
+\hypertarget{temel-obje-tuxfcrleri}{%
+\chapter{Temel obje türleri}\label{temel-obje-tuxfcrleri}}
 
 R'da 5 çeşit temel obje türü var:
 
@@ -755,7 +593,7 @@ R'da 5 çeşit temel obje türü var:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x =}\StringTok{ 'a'}
+\NormalTok{x =}\StringTok{ \textquotesingle{}a\textquotesingle{}}
 \NormalTok{x}
 \end{Highlighting}
 \end{Shaded}
@@ -774,14 +612,7 @@ R'da 5 çeşit temel obje türü var:
 ## [1] 4
 \end{verbatim}
 
-Karakter değişkeni yaratmak için, tırnak işaretlerini
-(\texttt{\textquotesingle{}\textquotesingle{}}) kullanıyoruz. Yani,
-\texttt{x} bir obje iken \texttt{\textquotesingle{}a\textquotesingle{}}
-bir karakterdir. Bu sebeple, \texttt{a} yazdığınızda, R \texttt{a}
-isminde bir obje arıyor, bizim a isminde bir objemiz olmadığından
-\texttt{obje\ bulunamadı} hatası veriyor. Bu arada R'da en iyi dostumuz
-hata mesajları. Genelde hata mesajı sorunun nerede olduğu hakkında çok
-iyi fikir verecektir.
+Karakter değişkeni yaratmak için, tırnak işaretlerini (\texttt{\textquotesingle{}\textquotesingle{}}) kullanıyoruz. Yani, \texttt{x} bir obje iken \texttt{\textquotesingle{}a\textquotesingle{}} bir karakterdir. Bu sebeple, \texttt{a} yazdığınızda, R \texttt{a} isminde bir obje arıyor, bizim a isminde bir objemiz olmadığından \texttt{obje\ bulunamadı} hatası veriyor. Bu arada R'da en iyi dostumuz hata mesajları. Genelde hata mesajı sorunun nerede olduğu hakkında çok iyi fikir verecektir.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -797,7 +628,7 @@ iyi fikir verecektir.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x =}\StringTok{ 'melike'}
+\NormalTok{x =}\StringTok{ \textquotesingle{}melike\textquotesingle{}}
 \NormalTok{x}
 \end{Highlighting}
 \end{Shaded}
@@ -816,13 +647,10 @@ iyi fikir verecektir.
 ## [1] "character"
 \end{verbatim}
 
-Karakter sınıfındaki objeler, tek bir karakter içermek zorunda değil,
-\texttt{\textquotesingle{}a\textquotesingle{}} da
-\texttt{\textquotesingle{}aaa\textquotesingle{}} da karakter
-objeleridir.
+Karakter sınıfındaki objeler, tek bir karakter içermek zorunda değil, \texttt{\textquotesingle{}a\textquotesingle{}} da \texttt{\textquotesingle{}aaa\textquotesingle{}} da karakter objeleridir.
 
-\hypertarget{numerik-numeric}{%
-\section{Nümerik (numeric)}\label{numerik-numeric}}
+\hypertarget{nuxfcmerik-numeric}{%
+\section{Nümerik (numeric)}\label{nuxfcmerik-numeric}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -914,17 +742,15 @@ Burada ilginç olan kısımlar:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  R tam sayıları da özellikle belirtmediğimiz sürece nümerik olarak
-  alıyor
+  R tam sayıları da özellikle belirtmediğimiz sürece nümerik olarak alıyor
 \item
   \texttt{Sonsuz}un (\texttt{Inf}) veri tipi nümerik
 \item
-  \texttt{NaN} (``not a number'', ``sayı değil'') değeri de nümerik
-  sınıfında.
+  \texttt{NaN} (``not a number'', ``sayı değil'') değeri de nümerik sınıfında.
 \end{enumerate}
 
-\hypertarget{tam-saylar-integer}{%
-\section{Tam sayılar (integer)}\label{tam-saylar-integer}}
+\hypertarget{tam-sayux131lar-integer}{%
+\section{Tam sayılar (integer)}\label{tam-sayux131lar-integer}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -973,8 +799,8 @@ Burada ilginç olan kısımlar:
 ## [1] "complex"
 \end{verbatim}
 
-\hypertarget{mantksal-logical-boolean}{%
-\section{Mantıksal (logical, boolean)}\label{mantksal-logical-boolean}}
+\hypertarget{mantux131ksal-logical-boolean}{%
+\section{Mantıksal (logical, boolean)}\label{mantux131ksal-logical-boolean}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1029,8 +855,7 @@ Burada ilginç olan kısımlar:
 ## [1] TRUE
 \end{verbatim}
 
-TRUE ve FALSE iki temel mantıksal değişken (True=Doğru, False=Yanlış).
-Sadece baş harfleri kullanılarak da ifade edilebilirler.
+TRUE ve FALSE iki temel mantıksal değişken (True=Doğru, False=Yanlış). Sadece baş harfleri kullanılarak da ifade edilebilirler.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1042,45 +867,30 @@ Sadece baş harfleri kullanılarak da ifade edilebilirler.
 ## Error in eval(expr, envir, enclos): object 'f' not found
 \end{verbatim}
 
-Ancak bu harfler büyük harf olmali yoksa \texttt{f} ismindeki objeye
-eşitlemeye çalışmış oluyoruz x'i.
+Ancak bu harfler büyük harf olmali yoksa \texttt{f} ismindeki objeye eşitlemeye çalışmış oluyoruz x'i.
 
-Alıştırma olarak şu objelerin sınıflarını tahmin etmeye çalışıp, yanılıp
-yanılmadığınızı kontrol edebilirsiniz:
+Alıştırma olarak şu objelerin sınıflarını tahmin etmeye çalışıp, yanılıp yanılmadığınızı kontrol edebilirsiniz:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{a=}\StringTok{'5'} 
-\NormalTok{b=}\StringTok{'T'}
+\NormalTok{a=}\StringTok{\textquotesingle{}5\textquotesingle{}} 
+\NormalTok{b=}\StringTok{\textquotesingle{}T\textquotesingle{}}
 \NormalTok{y=}\FloatTok{10.5}\NormalTok{L}
-\NormalTok{x=}\StringTok{'y'}
+\NormalTok{x=}\StringTok{\textquotesingle{}y\textquotesingle{}}
 \NormalTok{d=x}
 \end{Highlighting}
 \end{Shaded}
 
-Tırnak işaretleri içinde veriler girildiğinden \texttt{a}, \texttt{b},
-\texttt{x}, ve dolayısıyla \texttt{d} objeleri karakter tipindedir.
-\texttt{y} ise ondalıklı değer girdiğimizden \texttt{L} uzantısını
-kullansak da tam sayı değil nümerik tipindedir.
+Tırnak işaretleri içinde veriler girildiğinden \texttt{a}, \texttt{b}, \texttt{x}, ve dolayısıyla \texttt{d} objeleri karakter tipindedir. \texttt{y} ise ondalıklı değer girdiğimizden \texttt{L} uzantısını kullansak da tam sayı değil nümerik tipindedir.
 
-İlerledikçe \texttt{class()} fonksiyonu ile objelere baktığınızda farklı
-cevaplar alacağız. Mesela objelerden oluşan objelerimiz olduğunda - 1den
-100e kadar olan sayıları içeren 10x10luk bir matrisiniz varsa mesela
-(\texttt{class(matrix(1:100,10))}). Veya R'ın nesne tabalı programlama
-(object oriented programming) dili olmasının getirisi olarak, yeni obje
-sınıfları ile çalıştığınızda.
+İlerledikçe \texttt{class()} fonksiyonu ile objelere baktığınızda farklı cevaplar alacağız. Mesela objelerden oluşan objelerimiz olduğunda - 1den 100e kadar olan sayıları içeren 10x10luk bir matrisiniz varsa mesela (\texttt{class(matrix(1:100,10))}). Veya R'ın nesne tabalı programlama (object oriented programming) dili olmasının getirisi olarak, yeni obje sınıfları ile çalıştığınızda.
 
-Eğer ki obje açık bir obje sınıfına sahipse (örn. matrix gibi), nümerik
-değerlerden oluşan bir obje mi, karakter objesi mi, bunu görmek yerine
-sınıfını göreceksiniz. Bu durumda \texttt{mode()} fonksiyonunu
-kullanarak ne tip objelerden oluştuğunu görebiliriz, örn
-\texttt{mode(matrix(1:100,10))}.
+Eğer ki obje açık bir obje sınıfına sahipse (örn. matrix gibi), nümerik değerlerden oluşan bir obje mi, karakter objesi mi, bunu görmek yerine sınıfını göreceksiniz. Bu durumda \texttt{mode()} fonksiyonunu kullanarak ne tip objelerden oluştuğunu görebiliriz, örn \texttt{mode(matrix(1:100,10))}.
 
-\hypertarget{vektorler}{%
-\chapter{Vektörler}\label{vektorler}}
+\hypertarget{vektuxf6rler}{%
+\chapter{Vektörler}\label{vektuxf6rler}}
 
-R kimi veri yapıları üzerinde işlem yapar. En basit veri yapılarından
-biri olan vektörler, aynı temel obje türünden öğeler içeren dizilerdir.
+R kimi veri yapıları üzerinde işlem yapar. En basit veri yapılarından biri olan vektörler, aynı temel obje türünden öğeler içeren dizilerdir.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1093,17 +903,13 @@ biri olan vektörler, aynı temel obje türünden öğeler içeren dizilerdir.
 ## [1] 1 2 3
 \end{verbatim}
 
-Burada `x'; 1, 2, ve 3 öğelerine sahip bir vektördür. Vektör oluşturmak
-için bu örnekte \texttt{c()} fonksiyonunu kullandık. \texttt{c}yi,
-\texttt{concatenate} (bağlamak) ya da \texttt{combine} (birleştirmek)
-kelimelerinden birinin kısaltılmış hali olarak aklınızda tutabilirsiniz.
+Burada `x'; 1, 2, ve 3 öğelerine sahip bir vektördür. Vektör oluşturmak için bu örnekte \texttt{c()} fonksiyonunu kullandık. \texttt{c}yi, \texttt{concatenate} (bağlamak) ya da \texttt{combine} (birleştirmek) kelimelerinden birinin kısaltılmış hali olarak aklınızda tutabilirsiniz.
 
-Önceki örnekte nümerik tipte öğelerden oluşan bir vektör yarattık. Ancak
-vektörler hepsi aynı olduğu sürece diğer tiplerden de oluşabilir.
+Önceki örnekte nümerik tipte öğelerden oluşan bir vektör yarattık. Ancak vektörler hepsi aynı olduğu sürece diğer tiplerden de oluşabilir.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x =}\StringTok{ }\KeywordTok{c}\NormalTok{(T,F,F) }\CommentTok{# logical}
+\NormalTok{x =}\StringTok{ }\KeywordTok{c}\NormalTok{(T,F,F) }\CommentTok{\# logical}
 \NormalTok{x}
 \end{Highlighting}
 \end{Shaded}
@@ -1114,7 +920,7 @@ vektörler hepsi aynı olduğu sürece diğer tiplerden de oluşabilir.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'x'}\NormalTok{,}\StringTok{'y'}\NormalTok{,}\StringTok{'aa'}\NormalTok{,}\StringTok{'oiasjfioasjf'}\NormalTok{) }\CommentTok{# character}
+\NormalTok{x =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}x\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}aa\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}oiasjfioasjf\textquotesingle{}}\NormalTok{) }\CommentTok{\# character}
 \NormalTok{x}
 \end{Highlighting}
 \end{Shaded}
@@ -1125,7 +931,7 @@ vektörler hepsi aynı olduğu sürece diğer tiplerden de oluşabilir.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{+}\NormalTok{4i,}\DecValTok{5}\OperatorTok{+}\NormalTok{2i) }\CommentTok{# complex}
+\NormalTok{x =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{+}\NormalTok{4i,}\DecValTok{5}\OperatorTok{+}\NormalTok{2i) }\CommentTok{\# complex}
 \NormalTok{x}
 \end{Highlighting}
 \end{Shaded}
@@ -1136,7 +942,7 @@ vektörler hepsi aynı olduğu sürece diğer tiplerden de oluşabilir.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x =}\StringTok{ }\KeywordTok{c}\NormalTok{(1L,5L) }\CommentTok{#integer}
+\NormalTok{x =}\StringTok{ }\KeywordTok{c}\NormalTok{(1L,5L) }\CommentTok{\#integer}
 \NormalTok{x}
 \end{Highlighting}
 \end{Shaded}
@@ -1145,19 +951,15 @@ vektörler hepsi aynı olduğu sürece diğer tiplerden de oluşabilir.
 ## [1] 1 5
 \end{verbatim}
 
-Şimdi de aynı tipte olmayan öğelerle vektör oluşturmaya çalıştığımızda
-ne oluyor, bunu görelim. İlk deneme olarak bütün tipleri girdi olarak
-verip bir vektör yaratmaya çalışalım.
+Şimdi de aynı tipte olmayan öğelerle vektör oluşturmaya çalıştığımızda ne oluyor, bunu görelim. İlk deneme olarak bütün tipleri girdi olarak verip bir vektör yaratmaya çalışalım.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{1.5}\NormalTok{, }\StringTok{'karakter'}\NormalTok{, 3i}\OperatorTok{+}\DecValTok{2}\NormalTok{, }\OtherTok{TRUE}\NormalTok{, F)}
+\NormalTok{x =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{1.5}\NormalTok{, }\StringTok{\textquotesingle{}karakter\textquotesingle{}}\NormalTok{, 3i}\OperatorTok{+}\DecValTok{2}\NormalTok{, }\OtherTok{TRUE}\NormalTok{, F)}
 \end{Highlighting}
 \end{Shaded}
 
-Bu örnekte; nümerik, karakter, kompleks ve boolean tipinde öğelerle ile
-bir vektor yaratmak istedik. Ve hata almadık Peki `x' objesinin modu ne
-ve nasıl bir vektor elde ettik?
+Bu örnekte; nümerik, karakter, kompleks ve boolean tipinde öğelerle ile bir vektor yaratmak istedik. Ve hata almadık Peki `x' objesinin modu ne ve nasıl bir vektor elde ettik?
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1169,16 +971,11 @@ ve nasıl bir vektor elde ettik?
 ## [1] "1.5"      "karakter" "2+3i"     "TRUE"     "FALSE"
 \end{verbatim}
 
-Hata almadık ama vektör oluşturma sırasında öğeler kendi modlarını
-koruyamadılar. Data tipleri arasında bir hiyerarşi vardır ve R farklı
-tipte öğeleri birleştirirken bu objelerde hiyerarşide en yüksek olanı
-seçerek vektör yaratır. Buradan yapacağımız çıkarım, karakter tipi
-hiyerarşide en yüksek olan. Şimdi sırasıyla en yüksekte olanı çıkartarak
-hiyerarşiyi çözmeye çalışalım.
+Hata almadık ama vektör oluşturma sırasında öğeler kendi modlarını koruyamadılar. Data tipleri arasında bir hiyerarşi vardır ve R farklı tipte öğeleri birleştirirken bu objelerde hiyerarşide en yüksek olanı seçerek vektör yaratır. Buradan yapacağımız çıkarım, karakter tipi hiyerarşide en yüksek olan. Şimdi sırasıyla en yüksekte olanı çıkartarak hiyerarşiyi çözmeye çalışalım.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# karakteri cikarttigimizda}
+\CommentTok{\# karakteri cikarttigimizda}
 \NormalTok{x =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{1.5}\NormalTok{, 3i}\OperatorTok{+}\DecValTok{2}\NormalTok{, }\OtherTok{TRUE}\NormalTok{, F)}
 \KeywordTok{mode}\NormalTok{(x)}
 \end{Highlighting}
@@ -1200,7 +997,7 @@ hiyerarşiyi çözmeye çalışalım.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# kompleksi cikarttigimizda}
+\CommentTok{\# kompleksi cikarttigimizda}
 \NormalTok{x =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{1.5}\NormalTok{, }\OtherTok{TRUE}\NormalTok{, F)}
 \KeywordTok{mode}\NormalTok{(x)}
 \end{Highlighting}
@@ -1222,7 +1019,7 @@ hiyerarşiyi çözmeye çalışalım.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# numerigi cikarttigimizda}
+\CommentTok{\# numerigi cikarttigimizda}
 \NormalTok{x =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OtherTok{TRUE}\NormalTok{, F)}
 \KeywordTok{mode}\NormalTok{(x)}
 \end{Highlighting}
@@ -1242,14 +1039,12 @@ hiyerarşiyi çözmeye çalışalım.
 ## [1]  TRUE FALSE
 \end{verbatim}
 
-Bu durumda boolean \textless{} nümerik \textless{} kompleks \textless{}
-karakter çıkarımını yapabiliriz.
+Bu durumda boolean \textless{} nümerik \textless{} kompleks \textless{} karakter çıkarımını yapabiliriz.
 
-\hypertarget{vektorleri-birlestirmek}{%
-\section{Vektorleri birleştirmek}\label{vektorleri-birlestirmek}}
+\hypertarget{vektorleri-birleux15ftirmek}{%
+\section{Vektorleri birleştirmek}\label{vektorleri-birleux15ftirmek}}
 
-Vektör yaratmak için kullandığımız c() fonksiyonu, aynı zamanda
-vektörleri birleştirmek için de kullanılabilir.
+Vektör yaratmak için kullandığımız c() fonksiyonu, aynı zamanda vektörleri birleştirmek için de kullanılabilir.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1295,8 +1090,7 @@ vektörleri birleştirmek için de kullanılabilir.
 ## [1] 1 2 3 4 5 6 9 8
 \end{verbatim}
 
-Ve önceden bahsettiğimiz, data tipinin hiyerarşide en yüksek olana
-dönüştürülmesi bu durumda da geçerlidir.
+Ve önceden bahsettiğimiz, data tipinin hiyerarşide en yüksek olana dönüştürülmesi bu durumda da geçerlidir.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1311,7 +1105,7 @@ dönüştürülmesi bu durumda da geçerlidir.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{y =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'a'}\NormalTok{,}\StringTok{'b'}\NormalTok{,}\StringTok{'c'}\NormalTok{)}
+\NormalTok{y =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}a\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}c\textquotesingle{}}\NormalTok{)}
 \NormalTok{y}
 \end{Highlighting}
 \end{Shaded}
@@ -1331,11 +1125,10 @@ dönüştürülmesi bu durumda da geçerlidir.
 ## [1] "1" "2" "3" "a" "b" "c"
 \end{verbatim}
 
-\hypertarget{vektor-aritmetigi}{%
-\section{Vektor aritmetiği}\label{vektor-aritmetigi}}
+\hypertarget{vektor-aritmetiux11fi}{%
+\section{Vektor aritmetiği}\label{vektor-aritmetiux11fi}}
 
-Daha önce R'ı hesap makinesi gibi kullanabileceğimizi görmüştük.
-Vektörlerle de aynı işlemleri yapabilirsiniz.
+Daha önce R'ı hesap makinesi gibi kullanabileceğimizi görmüştük. Vektörlerle de aynı işlemleri yapabilirsiniz.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1360,7 +1153,7 @@ Vektörlerle de aynı işlemleri yapabilirsiniz.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{(x }\OperatorTok{*}\StringTok{ }\DecValTok{5}\NormalTok{) }\DecValTok{-2}
+\NormalTok{(x }\OperatorTok{*}\StringTok{ }\DecValTok{5}\NormalTok{) }\DecValTok{{-}2}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1368,11 +1161,7 @@ Vektörlerle de aynı işlemleri yapabilirsiniz.
 ## [1]  3  8 13
 \end{verbatim}
 
-Burada önemli olan, işlemlerin her bir öğe üzerinde ayrı ayrı
-gerçekleştiriliyor oluşu. Eğer iki vektörümüz olsaydı,ve bu iki vektörü
-toplamak isteseysdik, benzer şekilde birinci öğenin ikinci vektördeki
-birinci öğe ile, ikinci öğenin ikinci vektördeki ikinci öğe ile vb.
-şekilde toplandığını görürdük.
+Burada önemli olan, işlemlerin her bir öğe üzerinde ayrı ayrı gerçekleştiriliyor oluşu. Eğer iki vektörümüz olsaydı,ve bu iki vektörü toplamak isteseysdik, benzer şekilde birinci öğenin ikinci vektördeki birinci öğe ile, ikinci öğenin ikinci vektördeki ikinci öğe ile vb. şekilde toplandığını görürdük.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1396,8 +1185,7 @@ birinci öğe ile, ikinci öğenin ikinci vektördeki ikinci öğe ile vb.
 ## [1]  4 10 18
 \end{verbatim}
 
-Peki ya vektörlerimi eşit uzunlukta değilse? Bu durumda kısa olan
-vektor, uzun vektordeki öğeler bitene kadar tekrar tekrar kullanılır.
+Peki ya vektörlerimi eşit uzunlukta değilse? Bu durumda kısa olan vektor, uzun vektordeki öğeler bitene kadar tekrar tekrar kullanılır.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1414,29 +1202,18 @@ vektor, uzun vektordeki öğeler bitene kadar tekrar tekrar kullanılır.
 \begin{itemize}
 \tightlist
 \item
-  İlk vektördeki ilk eleman olan 1, ikinci vektördeki ilk eleman olan 2
-  ile çarpıldı ve sonucun ilk elemanı 2 oldu.
+  İlk vektördeki ilk eleman olan 1, ikinci vektördeki ilk eleman olan 2 ile çarpıldı ve sonucun ilk elemanı 2 oldu.
 \item
-  İlk vektördeki ikinci eleman olan 2, ikinci vektördeki ikinci eleman
-  olan 3 ile çarğıldı ve sonucun ikinci elemanı 6 oldu.
+  İlk vektördeki ikinci eleman olan 2, ikinci vektördeki ikinci eleman olan 3 ile çarğıldı ve sonucun ikinci elemanı 6 oldu.
 \item
-  İlk vektördeki üçüncü eleman olan 3, ikinci vektörde üçüncü bir eleman
-  olmamasından dolayı ilk eleman olan 2 ile çarpıldı ve sonucun üçüncü
-  elemanı 6 oldu.
+  İlk vektördeki üçüncü eleman olan 3, ikinci vektörde üçüncü bir eleman olmamasından dolayı ilk eleman olan 2 ile çarpıldı ve sonucun üçüncü elemanı 6 oldu.
 \item
-  İlk vektördeki dördüncü eleman olan 4, ikinci vektörde ikinci eleman
-  olan 3 ile çarpıldı ve sonucun üçüncü elemanı 12 oldu.
+  İlk vektördeki dördüncü eleman olan 4, ikinci vektörde ikinci eleman olan 3 ile çarpıldı ve sonucun üçüncü elemanı 12 oldu.
 \end{itemize}
 
-Yani bu tarz işlemleri yaparken dikkat etmek gerekiyor. Bu işlemin
-sonucunda R'ın nasıl davranacağını bilmeyen birisi 8 elemanlı bir vektör
-almayı, yani ilk vektör önce 2 sonra 3 ile çarpıp birleştirilir diye
-bekleyebilir örneğin. Ancak R böyle davranmıyor.
+Yani bu tarz işlemleri yaparken dikkat etmek gerekiyor. Bu işlemin sonucunda R'ın nasıl davranacağını bilmeyen birisi 8 elemanlı bir vektör almayı, yani ilk vektör önce 2 sonra 3 ile çarpıp birleştirilir diye bekleyebilir örneğin. Ancak R böyle davranmıyor.
 
-Peki ya vektörlerimizin uzunluğu birbirinin katı olmasaydı? Burada 4
-öğeli bir vektörü 2 öğeli bir vektör ile çarptık. 4 öğeli bir vektörü, 3
-öğeli bir vektör ile çarpmaya çalışsaydık farklı bir davranış bekler
-miyiz?
+Peki ya vektörlerimizin uzunluğu birbirinin katı olmasaydı? Burada 4 öğeli bir vektörü 2 öğeli bir vektör ile çarptık. 4 öğeli bir vektörü, 3 öğeli bir vektör ile çarpmaya çalışsaydık farklı bir davranış bekler miyiz?
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1455,25 +1232,17 @@ miyiz?
 ## [1] 1 4 9 4
 \end{verbatim}
 
-Hayır. Tam olarak önceki gibi bir davranış görüyoruz, ancak bu sefer R
-aynı zamanda bir uyarı mesajı veriyor ve vektörlerin birbirinin katı
-uzunlukta olmadığını söylüyor.
+Hayır. Tam olarak önceki gibi bir davranış görüyoruz, ancak bu sefer R aynı zamanda bir uyarı mesajı veriyor ve vektörlerin birbirinin katı uzunlukta olmadığını söylüyor.
 
-\hypertarget{vektor-indisleri}{%
-\section{Vektör indisleri}\label{vektor-indisleri}}
+\hypertarget{vektuxf6r-indisleri}{%
+\section{Vektör indisleri}\label{vektuxf6r-indisleri}}
 
-Bir vektörün içindeki elemanlara ulaşmak için köşeli parantez
-\texttt{{[}{]}} operatorunu kullanabiliriz. Köşeli parantez içine
-çağırmak - ulaşmak istediğimiz öğenin indeksini, yani vektör içindeki
-sırasını yazarak istediğimiz elemana ulaşabiliriz. Burada önemli olan
-bir konu, R diğer kimi programlama dillerinin aksine 1-tabanlı
-indeksleme kullanıyor, yani ilk elemanın indeksi 1 (Örneğin python'da
-ilk elemanın indeksi 0dır).
+Bir vektörün içindeki elemanlara ulaşmak için köşeli parantez \texttt{{[}{]}} operatorunu kullanabiliriz. Köşeli parantez içine çağırmak - ulaşmak istediğimiz öğenin indeksini, yani vektör içindeki sırasını yazarak istediğimiz elemana ulaşabiliriz. Burada önemli olan bir konu, R diğer kimi programlama dillerinin aksine 1-tabanlı indeksleme kullanıyor, yani ilk elemanın indeksi 1 (Örneğin python'da ilk elemanın indeksi 0dır).
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'a'}\NormalTok{,}\StringTok{'b'}\NormalTok{,}\StringTok{'c'}\NormalTok{,}\StringTok{'d'}\NormalTok{)}
-\NormalTok{x[}\DecValTok{1}\NormalTok{] }\CommentTok{# Birinci eleman}
+\NormalTok{x =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}a\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}c\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}d\textquotesingle{}}\NormalTok{)}
+\NormalTok{x[}\DecValTok{1}\NormalTok{] }\CommentTok{\# Birinci eleman}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1483,7 +1252,7 @@ ilk elemanın indeksi 0dır).
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x[}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{] }\CommentTok{# Birinciden ikinciye kadar (dahil) elemanlar}
+\NormalTok{x[}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{] }\CommentTok{\# Birinciden ikinciye kadar (dahil) elemanlar}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1493,7 +1262,7 @@ ilk elemanın indeksi 0dır).
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x[}\DecValTok{2}\OperatorTok{:}\DecValTok{4}\NormalTok{] }\CommentTok{# Ikinciden dorduncuye kadar (dahil) elemanlar}
+\NormalTok{x[}\DecValTok{2}\OperatorTok{:}\DecValTok{4}\NormalTok{] }\CommentTok{\# Ikinciden dorduncuye kadar (dahil) elemanlar}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1503,7 +1272,7 @@ ilk elemanın indeksi 0dır).
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x[}\OperatorTok{-}\DecValTok{3}\NormalTok{] }\CommentTok{# Ucuncu haric tum elemanlar}
+\NormalTok{x[}\OperatorTok{{-}}\DecValTok{3}\NormalTok{] }\CommentTok{\# Ucuncu haric tum elemanlar}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1513,7 +1282,7 @@ ilk elemanın indeksi 0dır).
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{)] }\CommentTok{# Bir ve ucuncu elemanlar}
+\NormalTok{x[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{)] }\CommentTok{\# Bir ve ucuncu elemanlar}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1521,11 +1290,9 @@ ilk elemanın indeksi 0dır).
 ## [1] "a" "c"
 \end{verbatim}
 
-Gördüğünüz gibi, bu sistemle sadece tek bir eleman değil, istediğiniz
-alt kümeye de ulaşabilirsiniz.
+Gördüğünüz gibi, bu sistemle sadece tek bir eleman değil, istediğiniz alt kümeye de ulaşabilirsiniz.
 
-Burada daha önce görmediğimiz başka bir operatör (\texttt{:}) daha
-kullandık. Bu operatörü, bir dizi üretmek istediğimizde kullanıyoruz.
+Burada daha önce görmediğimiz başka bir operatör (\texttt{:}) daha kullandık. Bu operatörü, bir dizi üretmek istediğimizde kullanıyoruz.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1551,8 +1318,8 @@ Tekrar indekslere dönecek olursak, açıkta bıraktığımız kimi sorular var.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'a'}\NormalTok{,}\StringTok{'b'}\NormalTok{,}\StringTok{'c'}\NormalTok{,}\StringTok{'d'}\NormalTok{)}
-\CommentTok{# olmayan bir elemani istemek NA verir}
+\NormalTok{x =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}a\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}c\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}d\textquotesingle{}}\NormalTok{)}
+\CommentTok{\# olmayan bir elemani istemek NA verir}
 \NormalTok{x[}\DecValTok{5}\NormalTok{]}
 \end{Highlighting}
 \end{Shaded}
@@ -1563,7 +1330,7 @@ Tekrar indekslere dönecek olursak, açıkta bıraktığımız kimi sorular var.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# ayni indeksi tekrar tekrar isteyerek elemanin tekrar etmesini saglayabiliriz}
+\CommentTok{\# ayni indeksi tekrar tekrar isteyerek elemanin tekrar etmesini saglayabiliriz}
 \NormalTok{x[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{)]}
 \end{Highlighting}
 \end{Shaded}
@@ -1574,7 +1341,7 @@ Tekrar indekslere dönecek olursak, açıkta bıraktığımız kimi sorular var.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# elemanlari orijinal siralarina sadik kalarak cagirmak zorunda degiliz}
+\CommentTok{\# elemanlari orijinal siralarina sadik kalarak cagirmak zorunda degiliz}
 \NormalTok{x[}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{)]}
 \end{Highlighting}
 \end{Shaded}
@@ -1583,13 +1350,11 @@ Tekrar indekslere dönecek olursak, açıkta bıraktığımız kimi sorular var.
 ## [1] "c" "a" "d"
 \end{verbatim}
 
-Ayrıca boolean vektör kullanarak vektör altkümesi almak da mümkün. Eğer
-ki boolean \texttt{TRUE} ise, o indekse karşılık gelen eleman elde
-edilen altkümede yer alır, \texttt{FALSE} ise yer almaz.
+Ayrıca boolean vektör kullanarak vektör altkümesi almak da mümkün. Eğer ki boolean \texttt{TRUE} ise, o indekse karşılık gelen eleman elde edilen altkümede yer alır, \texttt{FALSE} ise yer almaz.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'a'}\NormalTok{,}\StringTok{'b'}\NormalTok{,}\StringTok{'c'}\NormalTok{,}\StringTok{'d'}\NormalTok{)}
+\NormalTok{x =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}a\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}c\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}d\textquotesingle{}}\NormalTok{)}
 \NormalTok{x[}\KeywordTok{c}\NormalTok{(T,F,T,T)]}
 \end{Highlighting}
 \end{Shaded}
@@ -1598,16 +1363,14 @@ edilen altkümede yer alır, \texttt{FALSE} ise yer almaz.
 ## [1] "a" "c" "d"
 \end{verbatim}
 
-\hypertarget{isimlendirilmis-vektor}{%
-\section{İsimlendirilmiş vektör}\label{isimlendirilmis-vektor}}
+\hypertarget{isimlendirilmiux15f-vektuxf6r}{%
+\section{İsimlendirilmiş vektör}\label{isimlendirilmiux15f-vektuxf6r}}
 
-Şimdiye kadar vektör içindeki elemanları çağırmak için hangi sırada
-olduklarını kullanıyorduk. Oysa eğer ki vektör içindeki elemanların
-isimleri olsaydı bu isimleri kullanabilirdik.
+Şimdiye kadar vektör içindeki elemanları çağırmak için hangi sırada olduklarını kullanıyorduk. Oysa eğer ki vektör içindeki elemanların isimleri olsaydı bu isimleri kullanabilirdik.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{myvec =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DataTypeTok{birinci=}\StringTok{'x'}\NormalTok{,}\DataTypeTok{ikinci=}\StringTok{'y'}\NormalTok{)}
+\NormalTok{myvec =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DataTypeTok{birinci=}\StringTok{\textquotesingle{}x\textquotesingle{}}\NormalTok{,}\DataTypeTok{ikinci=}\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{)}
 \NormalTok{myvec}
 \end{Highlighting}
 \end{Shaded}
@@ -1630,7 +1393,7 @@ isimleri olsaydı bu isimleri kullanabilirdik.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{myvec[}\StringTok{'ikinci'}\NormalTok{]}
+\NormalTok{myvec[}\StringTok{\textquotesingle{}ikinci\textquotesingle{}}\NormalTok{]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1639,13 +1402,11 @@ isimleri olsaydı bu isimleri kullanabilirdik.
 ##    "y"
 \end{verbatim}
 
-Vektöre isim atamak, örnekteki gibi \texttt{c()} fonksiyonu içinde
-yapılabileceği gibi, sonradan \texttt{names()} fonksiyonu kullanılarak
-da yapılabilir.
+Vektöre isim atamak, örnekteki gibi \texttt{c()} fonksiyonu içinde yapılabileceği gibi, sonradan \texttt{names()} fonksiyonu kullanılarak da yapılabilir.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{a =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'x'}\NormalTok{,}\StringTok{'y'}\NormalTok{)}
+\NormalTok{a =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}x\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{)}
 \NormalTok{a}
 \end{Highlighting}
 \end{Shaded}
@@ -1656,7 +1417,7 @@ da yapılabilir.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{isimvektorum =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'birinci'}\NormalTok{,}\StringTok{'ikinci'}\NormalTok{)}
+\NormalTok{isimvektorum =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}birinci\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}ikinci\textquotesingle{}}\NormalTok{)}
 \NormalTok{isimvektorum}
 \end{Highlighting}
 \end{Shaded}
@@ -1680,15 +1441,13 @@ da yapılabilir.
 \hypertarget{listeler}{%
 \chapter{Listeler}\label{listeler}}
 
-Bir önceki konuda vektörlerin tek bir temel obje tipinden oluştuğunu
-söyledik. Listeler bu açıdan vektörlerden farklıdır ve birden fazla obje
-tipini içerebilir.
+Bir önceki konuda vektörlerin tek bir temel obje tipinden oluştuğunu söyledik. Listeler bu açıdan vektörlerden farklıdır ve birden fazla obje tipini içerebilir.
 
 İlk olarak bir liste oluşturalım:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mylist =}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\OtherTok{TRUE}\NormalTok{, }\StringTok{'a'}\NormalTok{)}
+\NormalTok{mylist =}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\OtherTok{TRUE}\NormalTok{, }\StringTok{\textquotesingle{}a\textquotesingle{}}\NormalTok{)}
 \NormalTok{mylist}
 \end{Highlighting}
 \end{Shaded}
@@ -1707,9 +1466,7 @@ tipini içerebilir.
 ## [1] "a"
 \end{verbatim}
 
-Bu sefer vektörlerde karşılaştığımız tür dönüştürme davranışı işe
-karşılaşmadık ve her eleman ilk girdiğimiz şekilde kaldı. Şimdi listenin
-1. elemanına ulaşalım:
+Bu sefer vektörlerde karşılaştığımız tür dönüştürme davranışı işe karşılaşmadık ve her eleman ilk girdiğimiz şekilde kaldı. Şimdi listenin 1. elemanına ulaşalım:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1722,11 +1479,7 @@ karşılaşmadık ve her eleman ilk girdiğimiz şekilde kaldı. Şimdi listenin
 ## [1] 1
 \end{verbatim}
 
-Ne yazık ki eğer listemizin birinci elemanı ile işlem yapmak istiyorsak,
-bu doğru bir yöntem değil. Çünkü şu anda hala 1. elemana ulaşmadık.
-Listelerde her eleman bir tutucu olup, bir eleman içindeki değere
-ulaşmak istiyorsak çift köşeli parantez kullanmamız gerekir. Farkı daha
-iyi görebilmek için:
+Ne yazık ki eğer listemizin birinci elemanı ile işlem yapmak istiyorsak, bu doğru bir yöntem değil. Çünkü şu anda hala 1. elemana ulaşmadık. Listelerde her eleman bir tutucu olup, bir eleman içindeki değere ulaşmak istiyorsak çift köşeli parantez kullanmamız gerekir. Farkı daha iyi görebilmek için:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1768,22 +1521,16 @@ iyi görebilmek için:
 ## [1] 5
 \end{verbatim}
 
-İlk olarak listenin birinci elemanına tek köşeli parantez ile
-ulaşabileceğimizi varsayıp, 5 ile çarpmaya çalıştık. Ancak hata aldık.
-\texttt{class()} fonksiyonunu kullanıp gördük ki, tek köşeli parantez
-kullandığımda elde ettiğim obje hala bir liste. Listenin elemanının
-içinde depolanan bilgiye erişmek içinse iki tane köşeli parantez
-kullandım ve bu durumda 5 ile çarpabildim.
+İlk olarak listenin birinci elemanına tek köşeli parantez ile ulaşabileceğimizi varsayıp, 5 ile çarpmaya çalıştık. Ancak hata aldık. \texttt{class()} fonksiyonunu kullanıp gördük ki, tek köşeli parantez kullandığımda elde ettiğim obje hala bir liste. Listenin elemanının içinde depolanan bilgiye erişmek içinse iki tane köşeli parantez kullandım ve bu durumda 5 ile çarpabildim.
 
 \hypertarget{listele-indisleri}{%
 \section{Listele indisleri}\label{listele-indisleri}}
 
-Listelerin diğer çok bariz olmayan özelliklerine bakalım. Örneğin,
-listemizin 4.elemanından kurtulmak isteyelim:
+Listelerin diğer çok bariz olmayan özelliklerine bakalım. Örneğin, listemizin 4.elemanından kurtulmak isteyelim:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mylist[}\OperatorTok{-}\DecValTok{4}\NormalTok{]}
+\NormalTok{mylist[}\OperatorTok{{-}}\DecValTok{4}\NormalTok{]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1817,9 +1564,7 @@ Ya da
 ## [1] TRUE
 \end{verbatim}
 
-Bunlar tam olarak beklediğimiz gibi davranıyor ve 4. elemanı eksik liste
-elde ediyoruz. Peki çift köşeli parantez kullanarak, ilk üç elemandan
-oluşan bir vektör elde edebilir miyiz?
+Bunlar tam olarak beklediğimiz gibi davranıyor ve 4. elemanı eksik liste elde ediyoruz. Peki çift köşeli parantez kullanarak, ilk üç elemandan oluşan bir vektör elde edebilir miyiz?
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1831,17 +1576,14 @@ oluşan bir vektör elde edebilir miyiz?
 ## Error in mylist[[1:3]]: recursive indexing failed at level 2
 \end{verbatim}
 
-\hypertarget{listeyi-vektore-donusturmek}{%
-\section{Listeyi vektöre
-dönüştürmek}\label{listeyi-vektore-donusturmek}}
+\hypertarget{listeyi-vektuxf6re-duxf6nuxfcux15ftuxfcrmek}{%
+\section{Listeyi vektöre dönüştürmek}\label{listeyi-vektuxf6re-duxf6nuxfcux15ftuxfcrmek}}
 
-Hayır. İşe yaramadı. Peki bu ne demek, listeden asla vektör oluşturamaz
-mıyız? Hep liste olarak mı kalacak? Hayır, bunun için de
-\texttt{as.vector()} fonksiyonunu kullanabiliriz.
+Hayır. İşe yaramadı. Peki bu ne demek, listeden asla vektör oluşturamaz mıyız? Hep liste olarak mı kalacak? Hayır, bunun için de \texttt{as.vector()} fonksiyonunu kullanabiliriz.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{as.vector}\NormalTok{(mylist, }\DataTypeTok{mode =} \StringTok{'numeric'}\NormalTok{)}
+\KeywordTok{as.vector}\NormalTok{(mylist, }\DataTypeTok{mode =} \StringTok{\textquotesingle{}numeric\textquotesingle{}}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1855,7 +1597,7 @@ mıyız? Hep liste olarak mı kalacak? Hayır, bunun için de
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{as.vector}\NormalTok{(mylist, }\DataTypeTok{mode =} \StringTok{'character'}\NormalTok{)}
+\KeywordTok{as.vector}\NormalTok{(mylist, }\DataTypeTok{mode =} \StringTok{\textquotesingle{}character\textquotesingle{}}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1863,17 +1605,11 @@ mıyız? Hep liste olarak mı kalacak? Hayır, bunun için de
 ## [1] "1"    "2"    "TRUE" "a"
 \end{verbatim}
 
-Bu fonksiyonlar varsa da çok kullanıldıklarını söyleyemem. Her veri
-türünün kendine özgü avantaj ve dezavantajları var ve farklı tür veri
-için belli veri tipleri daha uygun olacaktır. Genelde dönüştürmeler kimi
-fonksiyonlar sadece vektör, ya da sadece liste tipinde objelerle
-çalışıyorsa gerekli olabilir. Onun dışında listeden vektöre dönüştürme
-işlemleri kafa karıştırıcı olabilir. Bunun bir sebebi de listelerin
-elemanlarının tek bir elemandan oluşma zorunluluğunun olmamasıdır.
+Bu fonksiyonlar varsa da çok kullanıldıklarını söyleyemem. Her veri türünün kendine özgü avantaj ve dezavantajları var ve farklı tür veri için belli veri tipleri daha uygun olacaktır. Genelde dönüştürmeler kimi fonksiyonlar sadece vektör, ya da sadece liste tipinde objelerle çalışıyorsa gerekli olabilir. Onun dışında listeden vektöre dönüştürme işlemleri kafa karıştırıcı olabilir. Bunun bir sebebi de listelerin elemanlarının tek bir elemandan oluşma zorunluluğunun olmamasıdır.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mylist2 =}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DecValTok{0}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{), T, }\StringTok{'a'}\NormalTok{)}
+\NormalTok{mylist2 =}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DecValTok{0}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{), T, }\StringTok{\textquotesingle{}a\textquotesingle{}}\NormalTok{)}
 \NormalTok{mylist2}
 \end{Highlighting}
 \end{Shaded}
@@ -1892,22 +1628,21 @@ elemanlarının tek bir elemandan oluşma zorunluluğunun olmamasıdır.
 ## [1] "a"
 \end{verbatim}
 
-Bu örnekte, listemizin ikinci elemanında iki elemanlı bir vektör
-sakladık. Şimdi az önceki yöntemi kullanmaya çalışırsak:
+Bu örnekte, listemizin ikinci elemanında iki elemanlı bir vektör sakladık. Şimdi az önceki yöntemi kullanmaya çalışırsak:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{as.vector}\NormalTok{(mylist2, }\DataTypeTok{mode =} \StringTok{'numeric'}\NormalTok{)}
+\KeywordTok{as.vector}\NormalTok{(mylist2, }\DataTypeTok{mode =} \StringTok{\textquotesingle{}numeric\textquotesingle{}}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Error in as.vector(mylist2, mode = "numeric"): (list) object cannot be coerced to type 'double'
+## Error in as.vector(mylist2, mode = "numeric"): 'list' object cannot be coerced to type 'double'
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{as.vector}\NormalTok{(mylist2, }\DataTypeTok{mode =} \StringTok{'character'}\NormalTok{)}
+\KeywordTok{as.vector}\NormalTok{(mylist2, }\DataTypeTok{mode =} \StringTok{\textquotesingle{}character\textquotesingle{}}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1915,10 +1650,7 @@ sakladık. Şimdi az önceki yöntemi kullanmaya çalışırsak:
 ## [1] "0"       "c(1, 2)" "TRUE"    "a"
 \end{verbatim}
 
-İkisi de beklediğimiz gibi bir sonuç değil. Eğer ki elde etmek
-istediğimiz vektör
-\texttt{c(\textquotesingle{}0\textquotesingle{},\ \textquotesingle{}1\textquotesingle{},\ \textquotesingle{}2\textquotesingle{},\ \textquotesingle{}T\textquotesingle{},\ \textquotesingle{}a\textquotesingle{})}
-vektörü ise, \texttt{unlist()} fonksiyonunu kullanabiliriz.
+İkisi de beklediğimiz gibi bir sonuç değil. Eğer ki elde etmek istediğimiz vektör \texttt{c(\textquotesingle{}0\textquotesingle{},\ \textquotesingle{}1\textquotesingle{},\ \textquotesingle{}2\textquotesingle{},\ \textquotesingle{}T\textquotesingle{},\ \textquotesingle{}a\textquotesingle{})} vektörü ise, \texttt{unlist()} fonksiyonunu kullanabiliriz.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1930,14 +1662,10 @@ vektörü ise, \texttt{unlist()} fonksiyonunu kullanabiliriz.
 ## [1] "0"    "1"    "2"    "TRUE" "a"
 \end{verbatim}
 
-\hypertarget{listelerde-aritmetik-islemler}{%
-\section{Listelerde aritmetik
-işlemler}\label{listelerde-aritmetik-islemler}}
+\hypertarget{listelerde-aritmetik-iux15flemler}{%
+\section{Listelerde aritmetik işlemler}\label{listelerde-aritmetik-iux15flemler}}
 
-Şimdi bir de vektörler üzerinde yaptığımız işlemler listeler üzerinde de
-geçerli mi ona kısaca göz atalım. İlk olarak eşlenik olarak
-değerlendirebileceğimiz bir vektör objesi (myvec) ve liste objesi
-(mylist) yaratalım:
+Şimdi bir de vektörler üzerinde yaptığımız işlemler listeler üzerinde de geçerli mi ona kısaca göz atalım. İlk olarak eşlenik olarak değerlendirebileceğimiz bir vektör objesi (myvec) ve liste objesi (mylist) yaratalım:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1968,9 +1696,7 @@ değerlendirebileceğimiz bir vektör objesi (myvec) ve liste objesi
 ## [1] 3
 \end{verbatim}
 
-Vektörler konusunda gördüğümüz kimi işlemlerin üzerinden geçip, listeler
-üzerinde de geçerli olup olmadıklarına bakalım. İlk olarak birleştirme
-işlemi:
+Vektörler konusunda gördüğümüz kimi işlemlerin üzerinden geçip, listeler üzerinde de geçerli olup olmadıklarına bakalım. İlk olarak birleştirme işlemi:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2030,15 +1756,14 @@ Yani, evet! Listeleri de birleştirebiliyoruz. Peki aritmetik işlemler?
 ## Error in mylist * 3: non-numeric argument to binary operator
 \end{verbatim}
 
-Hayır, aritmetik işlemleri yapabilmek için listenin elemanlarına tek tek
-erişmeliyiz.
+Hayır, aritmetik işlemleri yapabilmek için listenin elemanlarına tek tek erişmeliyiz.
 
-\hypertarget{isimlendirilmis-liste}{%
-\section{İsimlendirilmiş liste}\label{isimlendirilmis-liste}}
+\hypertarget{isimlendirilmiux15f-liste}{%
+\section{İsimlendirilmiş liste}\label{isimlendirilmiux15f-liste}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{names}\NormalTok{(myvec) =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'a'}\NormalTok{, }\StringTok{'b'}\NormalTok{, }\StringTok{'c'}\NormalTok{)}
+\KeywordTok{names}\NormalTok{(myvec) =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}a\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}c\textquotesingle{}}\NormalTok{)}
 \NormalTok{myvec}
 \end{Highlighting}
 \end{Shaded}
@@ -2050,7 +1775,7 @@ erişmeliyiz.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{names}\NormalTok{(mylist) =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'a'}\NormalTok{, }\StringTok{'b'}\NormalTok{, }\StringTok{'c'}\NormalTok{)}
+\KeywordTok{names}\NormalTok{(mylist) =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{\textquotesingle{}a\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}c\textquotesingle{}}\NormalTok{)}
 \NormalTok{mylist}
 \end{Highlighting}
 \end{Shaded}
@@ -2066,12 +1791,11 @@ erişmeliyiz.
 ## [1] 3
 \end{verbatim}
 
-Evet, isimlendirme de çalışıyor! Peki isimli listede alt küme alma
-işlemleri nasıl oluyor?
+Evet, isimlendirme de çalışıyor! Peki isimli listede alt küme alma işlemleri nasıl oluyor?
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{myvec[}\StringTok{'a'}\NormalTok{]}
+\NormalTok{myvec[}\StringTok{\textquotesingle{}a\textquotesingle{}}\NormalTok{]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2082,7 +1806,7 @@ işlemleri nasıl oluyor?
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mylist[}\StringTok{'a'}\NormalTok{]}
+\NormalTok{mylist[}\StringTok{\textquotesingle{}a\textquotesingle{}}\NormalTok{]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2093,7 +1817,7 @@ işlemleri nasıl oluyor?
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mylist[[}\StringTok{'a'}\NormalTok{]]}
+\NormalTok{mylist[[}\StringTok{\textquotesingle{}a\textquotesingle{}}\NormalTok{]]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2101,9 +1825,7 @@ işlemleri nasıl oluyor?
 ## [1] 1
 \end{verbatim}
 
-Aynı indismiş gibi isimleri kullanarak da liste elemanlarına
-ulaşabiliyoruz. Ancak listelerde aynı amaçla kullanabileceğimiz başka
-bir operatör daha var: \texttt{\$}
+Aynı indismiş gibi isimleri kullanarak da liste elemanlarına ulaşabiliyoruz. Ancak listelerde aynı amaçla kullanabileceğimiz başka bir operatör daha var: \texttt{\$}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2115,9 +1837,7 @@ bir operatör daha var: \texttt{\$}
 ## [1] 1
 \end{verbatim}
 
-Ve bu operatör çift köşeli paranteze denk işliyor, görüdüğünüz gibi
-liste tipinde bir obje değil, direkt olarak ilk eleman içine kaydedilen
-bilgiye ulaştık. Peki bu vektörlerde de çalışır mı?
+Ve bu operatör çift köşeli paranteze denk işliyor, görüdüğünüz gibi liste tipinde bir obje değil, direkt olarak ilk eleman içine kaydedilen bilgiye ulaştık. Peki bu vektörlerde de çalışır mı?
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2134,21 +1854,17 @@ Hayır!
 \hypertarget{matrisler}{%
 \chapter{Matrisler}\label{matrisler}}
 
-Matrisler, iki boyutta düzenlenmiş verilerdir, yanyana ya da altalta
-dizilenmis vektör gibi düşünülebilirler. İkişer elemanlı 3 vektörümüz
-oldugunu düşünelim:
+Matrisler, iki boyutta düzenlenmiş verilerdir, yanyana ya da altalta dizilenmis vektör gibi düşünülebilirler. İkişer elemanlı 3 vektörümüz oldugunu düşünelim:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{a <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\DecValTok{2}
-\NormalTok{b <-}\StringTok{ }\DecValTok{3}\OperatorTok{:}\DecValTok{4}
-\NormalTok{c <-}\StringTok{ }\DecValTok{5}\OperatorTok{:}\DecValTok{6}
+\NormalTok{a <{-}}\StringTok{ }\DecValTok{1}\OperatorTok{:}\DecValTok{2}
+\NormalTok{b <{-}}\StringTok{ }\DecValTok{3}\OperatorTok{:}\DecValTok{4}
+\NormalTok{c <{-}}\StringTok{ }\DecValTok{5}\OperatorTok{:}\DecValTok{6}
 \end{Highlighting}
 \end{Shaded}
 
-Şimdi bunları yanyana birleştirip, iki satır üç sütunlu bir matris
-oluşturalım. Bunun için \texttt{cbind()} yani, column-bind (sütun
-bağlama) fonksiyonunu kullanacağız.
+Şimdi bunları yanyana birleştirip, iki satır üç sütunlu bir matris oluşturalım. Bunun için \texttt{cbind()} yani, column-bind (sütun bağlama) fonksiyonunu kullanacağız.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2162,9 +1878,7 @@ bağlama) fonksiyonunu kullanacağız.
 ## [2,] 2 4 6
 \end{verbatim}
 
-Aynı şekilde \texttt{rbind()} yani row-bind (satır bağlama) fonksiyonu
-ile bu vektörleri satır satır birleştirip, 3 satır iki sutunlu bir
-matris de elde edebiliriz:
+Aynı şekilde \texttt{rbind()} yani row-bind (satır bağlama) fonksiyonu ile bu vektörleri satır satır birleştirip, 3 satır iki sutunlu bir matris de elde edebiliriz:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2179,8 +1893,7 @@ matris de elde edebiliriz:
 ## c    5    6
 \end{verbatim}
 
-Her satır ve sütunu ayrı ayrı vektör şeklinde birleştirerek matris
-oluşturmak yerine \texttt{matrix()} fonksiyonunu da kullanabiliriz.
+Her satır ve sütunu ayrı ayrı vektör şeklinde birleştirerek matris oluşturmak yerine \texttt{matrix()} fonksiyonunu da kullanabiliriz.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2195,14 +1908,7 @@ oluşturmak yerine \texttt{matrix()} fonksiyonunu da kullanabiliriz.
 ## [3,]    3    6    9
 \end{verbatim}
 
-Burada 1den 9a kadar sayıları 3 sütuna (ncol = 3 ile belirttik)
-yerleştirdik. Aynı şekilde satır sayısını da girebilirdik (nrow).
-\texttt{matrix()} fonksiyonu ile kullanabileceğimiz bir diğer argüman
-ise \texttt{byrow} argümanı. Önceki örnekte 1den 9a kadar sayıları
-içeren bir vektör oluşturup 3 sütuna bölmüştük. Bu fonksiyon varsayılan
-argümanlarla çalıştırıldığında önce birinci sütunu doldurup sonra
-ikinciye geçiyor. Eğer bunun yerine önce satırları doldurmasını
-istersek:
+Burada 1den 9a kadar sayıları 3 sütuna (ncol = 3 ile belirttik) yerleştirdik. Aynı şekilde satır sayısını da girebilirdik (nrow). \texttt{matrix()} fonksiyonu ile kullanabileceğimiz bir diğer argüman ise \texttt{byrow} argümanı. Önceki örnekte 1den 9a kadar sayıları içeren bir vektör oluşturup 3 sütuna bölmüştük. Bu fonksiyon varsayılan argümanlarla çalıştırıldığında önce birinci sütunu doldurup sonra ikinciye geçiyor. Eğer bunun yerine önce satırları doldurmasını istersek:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2219,16 +1925,14 @@ istersek:
 
 Şimdi 1:3 birinci satırı, 4:6 ikinci satırı oluşturdu.
 
-\hypertarget{matris-boyutlar}{%
-\section{Matris boyutları}\label{matris-boyutlar}}
+\hypertarget{matris-boyutlarux131}{%
+\section{Matris boyutları}\label{matris-boyutlarux131}}
 
-Bunlar dışında matrislerin vektörlerden bir farkı da boyut özelliğinin
-olması. Oysa vektörlerde uzunluk özelliğimiz vardır. Şu örneklere
-bakalım:
+Bunlar dışında matrislerin vektörlerden bir farkı da boyut özelliğinin olması. Oysa vektörlerde uzunluk özelliğimiz vardır. Şu örneklere bakalım:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mymat <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(a, b, c)}
+\NormalTok{mymat <{-}}\StringTok{ }\KeywordTok{cbind}\NormalTok{(a, b, c)}
 \KeywordTok{length}\NormalTok{(a)}
 \end{Highlighting}
 \end{Shaded}
@@ -2247,10 +1951,7 @@ bakalım:
 ## [1] 6
 \end{verbatim}
 
-`mymat' objesinin boyuna bakmak istediğimizde toplam eleman sayısı olan
-6yı veriyor. Oysa bu kaç satır ve sütundan oluştuğu bilgisini
-vermediğinden, matrisin yapısını anlamamızı zorlaştırıyor. Bu bilgiyi
-öğrenmek için \texttt{dim()} fonksiyonunu kullanacağız.
+`mymat' objesinin boyuna bakmak istediğimizde toplam eleman sayısı olan 6yı veriyor. Oysa bu kaç satır ve sütundan oluştuğu bilgisini vermediğinden, matrisin yapısını anlamamızı zorlaştırıyor. Bu bilgiyi öğrenmek için \texttt{dim()} fonksiyonunu kullanacağız.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2262,9 +1963,7 @@ vermediğinden, matrisin yapısını anlamamızı zorlaştırıyor. Bu bilgiyi
 ## [1] 2 3
 \end{verbatim}
 
-Burada önemli olan bir bilgi, dim() fonksiyonu ilk olarak satır sayısını
-sonra sütun sayısını yazar. Son olarak \texttt{dim()} fonksiyonunun
-vektörler üzerinde işe yaramayacağını görelim:
+Burada önemli olan bir bilgi, dim() fonksiyonu ilk olarak satır sayısını sonra sütun sayısını yazar. Son olarak \texttt{dim()} fonksiyonunun vektörler üzerinde işe yaramayacağını görelim:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2279,9 +1978,7 @@ vektörler üzerinde işe yaramayacağını görelim:
 \hypertarget{matris-indisleri}{%
 \section{Matris indisleri}\label{matris-indisleri}}
 
-Matris içindeki verilere ulaşmak için yine köşeli parantez
-kullanılabilir. Ancak bu sefer birden fazla boyut olduğundan satır ve
-sütunu virgül ile ayırarak yazacağız. Örneğin:
+Matris içindeki verilere ulaşmak için yine köşeli parantez kullanılabilir. Ancak bu sefer birden fazla boyut olduğundan satır ve sütunu virgül ile ayırarak yazacağız. Örneğin:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2306,11 +2003,10 @@ sütunu virgül ile ayırarak yazacağız. Örneğin:
 ## 3 5
 \end{verbatim}
 
-\texttt{mymat{[}1,\ 2:3{]}} kodu ile, mymat matrisinin 1. satırının 2den
-3e kadar olan elemanlarını istemiş oluyoruz.
+\texttt{mymat{[}1,\ 2:3{]}} kodu ile, mymat matrisinin 1. satırının 2den 3e kadar olan elemanlarını istemiş oluyoruz.
 
-\hypertarget{aritmetik-islemler}{%
-\section{Aritmetik işlemler}\label{aritmetik-islemler}}
+\hypertarget{aritmetik-iux15flemler}{%
+\section{Aritmetik işlemler}\label{aritmetik-iux15flemler}}
 
 Aynı vektörlerde olduğu gibi aritmetik işlemler yapmak da mümkün.
 
@@ -2376,16 +2072,7 @@ Bunu anlamak için matrisin ilk üç elemanına bakalım:
 ## [1] 1 2 3
 \end{verbatim}
 
-Virgül ile satır ve sütun ayırmadığımızdan elde ettiğimiz obje de
-matrisin ilk 3 elemanından oluşan bir vektör oldu. Buradan gördüğümüz
-gibi matrisin birinci elemanı ilk satır ilk sütunda, ikinci elemanı ilk
-sütün ikinci satırda - ve sonra diğer sütunlara geçiyoruz. Bu matrisi
-bir vektör ile işlem yapmak istediğimizde de aynı vektörlerde olduğu
-gibi önce birinci eleman vektördeki birinci elemanla, ikinci eleman
-vektördeki ikinci elemanla işleme giriyor. Vektördeki elemanlar
-bittiğinden tekrar başa dönüyoruz ve matrisin üçüncü elemanı vektörün
-ilk elemanı ile işleme giriyor ve böyle devam ediyor. Bu işlemin satır
-ve sütun sayısıyla alakalı olmadığını göstermek adına bir başka örnek:
+Virgül ile satır ve sütun ayırmadığımızdan elde ettiğimiz obje de matrisin ilk 3 elemanından oluşan bir vektör oldu. Buradan gördüğümüz gibi matrisin birinci elemanı ilk satır ilk sütunda, ikinci elemanı ilk sütün ikinci satırda - ve sonra diğer sütunlara geçiyoruz. Bu matrisi bir vektör ile işlem yapmak istediğimizde de aynı vektörlerde olduğu gibi önce birinci eleman vektördeki birinci elemanla, ikinci eleman vektördeki ikinci elemanla işleme giriyor. Vektördeki elemanlar bittiğinden tekrar başa dönüyoruz ve matrisin üçüncü elemanı vektörün ilk elemanı ile işleme giriyor ve böyle devam ediyor. Bu işlemin satır ve sütun sayısıyla alakalı olmadığını göstermek adına bir başka örnek:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2399,8 +2086,7 @@ ve sütun sayısıyla alakalı olmadığını göstermek adına bir başka örne
 ## [2,] 4 4 18
 \end{verbatim}
 
-Matris transpozu, satır ve sütunların yer değiştirmesi işlemidir ve
-\texttt{t()} fonksiyonu ile gerçekleştirilir.
+Matris transpozu, satır ve sütunların yer değiştirmesi işlemidir ve \texttt{t()} fonksiyonu ile gerçekleştirilir.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2415,12 +2101,7 @@ Matris transpozu, satır ve sütunların yer değiştirmesi işlemidir ve
 ## c    5    6
 \end{verbatim}
 
-Önceki örnekler matris çarpımı değil, matris içindeki değerlerin başka
-bir skalar ya da vektörle çarpımına örnekti. Rda matris çarpımı, ya da
-matris nokta çarpımı, yapmak da mümkün ve bu \texttt{\%*\%} operatörü
-ile yapılabilir. İki matrisin nokta çarpımı işlemine girebilmesi için
-birinci matrisin sütün sayısının, ikinci matrisin satır sayısına eşit
-olması gerekir.
+Önceki örnekler matris çarpımı değil, matris içindeki değerlerin başka bir skalar ya da vektörle çarpımına örnekti. Rda matris çarpımı, ya da matris nokta çarpımı, yapmak da mümkün ve bu \texttt{\%*\%} operatörü ile yapılabilir. İki matrisin nokta çarpımı işlemine girebilmesi için birinci matrisin sütün sayısının, ikinci matrisin satır sayısına eşit olması gerekir.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2438,7 +2119,7 @@ olması gerekir.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mymat }\OperatorTok{%*%}\StringTok{ }\NormalTok{mymat2}
+\NormalTok{mymat }\OperatorTok{\%*\%}\StringTok{ }\NormalTok{mymat2}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2448,9 +2129,7 @@ olması gerekir.
 ## [2,]   28
 \end{verbatim}
 
-Bir matrisin tersi, kendisi ile çarpıldığında birim matrisi verir ve Rda
-\texttt{solve()} fonksiyonu ile hesaplanabilir. Bu işlem ancak kare
-matrisler üzerinde gerçekleştirilebilir.
+Bir matrisin tersi, kendisi ile çarpıldığında birim matrisi verir ve Rda \texttt{solve()} fonksiyonu ile hesaplanabilir. Bu işlem ancak kare matrisler üzerinde gerçekleştirilebilir.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2461,9 +2140,9 @@ matrisler üzerinde gerçekleştirilebilir.
 
 \begin{verbatim}
 ##      [,1] [,2] [,3]
-## [1,]    2    9    4
-## [2,]    1    6    7
-## [3,]    8    5    3
+## [1,]    4    6    3
+## [2,]    1    8    5
+## [3,]    7    2    9
 \end{verbatim}
 
 \begin{Shaded}
@@ -2473,32 +2152,28 @@ matrisler üzerinde gerçekleştirilebilir.
 \end{Shaded}
 
 \begin{verbatim}
-##             [,1]        [,2]        [,3]
-## [1,] -0.06273063 -0.02583026  0.14391144
-## [2,]  0.19557196 -0.09594096 -0.03690037
-## [3,] -0.15867159  0.22878229  0.01107011
+##            [,1]        [,2]        [,3]
+## [1,]  0.2561983 -0.19834711  0.02479339
+## [2,]  0.1074380  0.06198347 -0.07024793
+## [3,] -0.2231405  0.14049587  0.10743802
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mymat }\OperatorTok{%*%}\StringTok{ }\KeywordTok{solve}\NormalTok{(mymat)}
+\NormalTok{mymat }\OperatorTok{\%*\%}\StringTok{ }\KeywordTok{solve}\NormalTok{(mymat)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##      [,1] [,2]          [,3]
-## [1,]    1    0 -2.775558e-17
-## [2,]    0    1 -2.775558e-17
-## [3,]    0    0  1.000000e+00
+##               [,1]          [,2] [,3]
+## [1,]  1.000000e+00 -1.665335e-16    0
+## [2,]  2.220446e-16  1.000000e+00    0
+## [3,] -4.440892e-16  0.000000e+00    1
 \end{verbatim}
 
-Bunlar dışında sık kullanılan matris işlemleri için
-\texttt{crossprod()}, \texttt{det()}, \texttt{eigen()}, \texttt{svd()}
-gibi fonksiyonlar da temel Rda mevcuttur.
+Bunlar dışında sık kullanılan matris işlemleri için \texttt{crossprod()}, \texttt{det()}, \texttt{eigen()}, \texttt{svd()} gibi fonksiyonlar da temel Rda mevcuttur.
 
-Son olarak, matrislerle çalışırken kolaylaştırıcı \texttt{rowMeans()},
-\texttt{colMeans()}, \texttt{rowSums()}, \texttt{colSums()} gibi satır /
-sütun ortalamalarına ve toplamlarına erişmek için fonksiyonlar mevcut.
+Son olarak, matrislerle çalışırken kolaylaştırıcı \texttt{rowMeans()}, \texttt{colMeans()}, \texttt{rowSums()}, \texttt{colSums()} gibi satır / sütun ortalamalarına ve toplamlarına erişmek için fonksiyonlar mevcut.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2508,9 +2183,9 @@ sütun ortalamalarına ve toplamlarına erişmek için fonksiyonlar mevcut.
 
 \begin{verbatim}
 ##      [,1] [,2] [,3]
-## [1,]    2    9    4
-## [2,]    1    6    7
-## [3,]    8    5    3
+## [1,]    4    6    3
+## [2,]    1    8    5
+## [3,]    7    2    9
 \end{verbatim}
 
 \begin{Shaded}
@@ -2520,7 +2195,7 @@ sütun ortalamalarına ve toplamlarına erişmek için fonksiyonlar mevcut.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 15 14 16
+## [1] 13 14 18
 \end{verbatim}
 
 \begin{Shaded}
@@ -2530,7 +2205,7 @@ sütun ortalamalarına ve toplamlarına erişmek için fonksiyonlar mevcut.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 11 20 14
+## [1] 12 16 17
 \end{verbatim}
 
 \begin{Shaded}
@@ -2540,7 +2215,7 @@ sütun ortalamalarına ve toplamlarına erişmek için fonksiyonlar mevcut.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 5.000000 4.666667 5.333333
+## [1] 4.333333 4.666667 6.000000
 \end{verbatim}
 
 \begin{Shaded}
@@ -2550,10 +2225,9 @@ sütun ortalamalarına ve toplamlarına erişmek için fonksiyonlar mevcut.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 3.666667 6.666667 4.666667
+## [1] 4.000000 5.333333 5.666667
 \end{verbatim}
 
-\bibliography{lib.bib}
-
+  \bibliography{lib.bib}
 
 \end{document}
