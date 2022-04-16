@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>R’a Giriş</title>
   <meta name="description" content="R istatistiksel programlama diline giris kitapcigi" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="R’a Giriş" />
   <meta property="og:type" content="book" />
@@ -32,8 +32,9 @@
   
 
 <link rel="next" href="Giris.html"/>
-<script src="libs/header-attrs-2.5/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,16 +50,15 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -118,6 +118,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -215,11 +216,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">R’a Giriş</h1>
 <p class="author"><em>H. Melike Dönertaş</em></p>
-<p class="date"><em>14-02-2021</em></p>
+<p class="date"><em>16-04-2022</em></p>
 </div>
-<div id="section" class="section level1 unnumbered" number="">
-<h1 class="unnumbered" number=""></h1>
-<p>Bu kitap oluşturulma aşamasında olup, haftalık olarak güncellenecek, yeni bölümler eklenecektir. Önerileriniz ve sorularınız için bana <a href="mailto:donertas.melike@gmail.com">email ile ulaşabilirsiniz</a>.</p>
+<div id="section" class="section level1 unnumbered">
+<h1 class="unnumbered"></h1>
+<p>Bu kitap oluşturulma aşamasında olup, zamanla güncellenecek, yeni bölümler eklenecektir.</p>
 <!-- R öğrenmeye ilk başlamam Bölüm \@ref(kaynaklar)de de linklerini verdiğim online dersler sayesinde oldu. Bu derslerin yaratıcılarına olan minnettarlığımı dile getirerek başlamalıyım.  -->
 <!-- Kitabın hazırlık sürecinin temeli 2014-2016 yılları arası ODTÜ Biyolojik Bilimler departmanında asistanlığını yaptığım 'Computational Biology using R' ve 'Introduction to Biometry' derslerine dayanır. Bu derslerde beraber asistanlik yaptığım araştırma görevlileri, derslerin koordinatorleri ve dersleri alan 100den fazla öğrenci, R konusunda kendi bilgilerimi geliştirmem için yardımcı olmanın yanı sıra bilginin aktarılması konusunda da çok şey öğrenmemi sağladılar, ve bunlar için hepsine çok teşekkür ediyorum.  -->
 <!-- Bu kitabı hazırlamam için beni destekleyen ve yanımda olan tüm arkadaşlarıma ve aileme sonsuz teşekkürü borç biliyorum. -->
@@ -235,7 +236,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -254,6 +254,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -274,6 +275,10 @@ gitbook.start({
 "text": null
 },
 "download": ["R_Giris.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }

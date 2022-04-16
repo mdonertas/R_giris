@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Bölüm 4 Temel obje türleri | R’a Giriş</title>
   <meta name="description" content="R istatistiksel programlama diline giris kitapcigi" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Bölüm 4 Temel obje türleri | R’a Giriş" />
   <meta property="og:type" content="book" />
@@ -32,8 +32,9 @@
   
 <link rel="prev" href="ilkadimlar.html"/>
 <link rel="next" href="vektörler.html"/>
-<script src="libs/header-attrs-2.5/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,16 +50,15 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -118,6 +118,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -217,93 +218,93 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>R’da 5 çeşit temel obje türü var:</p>
 <div id="karakter-character" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> Karakter (character)</h2>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="temel-obje-türleri.html#cb50-1"></a>x =<span class="st"> &#39;a&#39;</span></span>
-<span id="cb50-2"><a href="temel-obje-türleri.html#cb50-2"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="temel-obje-türleri.html#cb50-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="st">&#39;a&#39;</span></span>
+<span id="cb50-2"><a href="temel-obje-türleri.html#cb50-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] &quot;a&quot;</code></pre>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="temel-obje-türleri.html#cb52-1"></a>a</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="temel-obje-türleri.html#cb52-1" aria-hidden="true" tabindex="-1"></a>a</span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
 <p>Karakter değişkeni yaratmak için, tırnak işaretlerini (<code>''</code>) kullanıyoruz. Yani, <code>x</code> bir obje iken <code>'a'</code> bir karakterdir. Bu sebeple, <code>a</code> yazdığınızda, R <code>a</code> isminde bir obje arıyor, bizim a isminde bir objemiz olmadığından <code>obje bulunamadı</code> hatası veriyor. Bu arada R’da en iyi dostumuz hata mesajları. Genelde hata mesajı sorunun nerede olduğu hakkında çok iyi fikir verecektir.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="temel-obje-türleri.html#cb54-1"></a><span class="kw">class</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="temel-obje-türleri.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
 <p><code>class()</code> fonksiyonu obje sınıfını öğrenmemizi sağlıyor.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="temel-obje-türleri.html#cb56-1"></a>x =<span class="st"> &#39;melike&#39;</span></span>
-<span id="cb56-2"><a href="temel-obje-türleri.html#cb56-2"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="temel-obje-türleri.html#cb56-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="st">&#39;melike&#39;</span></span>
+<span id="cb56-2"><a href="temel-obje-türleri.html#cb56-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] &quot;melike&quot;</code></pre>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="temel-obje-türleri.html#cb58-1"></a><span class="kw">class</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="temel-obje-türleri.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
 <p>Karakter sınıfındaki objeler, tek bir karakter içermek zorunda değil, <code>'a'</code> da <code>'aaa'</code> da karakter objeleridir.</p>
 </div>
 <div id="nümerik-numeric" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Nümerik (numeric)</h2>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="temel-obje-türleri.html#cb60-1"></a>x =<span class="st"> </span><span class="dv">3</span></span>
-<span id="cb60-2"><a href="temel-obje-türleri.html#cb60-2"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="temel-obje-türleri.html#cb60-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb60-2"><a href="temel-obje-türleri.html#cb60-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="temel-obje-türleri.html#cb62-1"></a><span class="kw">class</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="temel-obje-türleri.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span></code></pre></div>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="temel-obje-türleri.html#cb64-1"></a>x =<span class="st"> </span><span class="fl">3.14</span></span>
-<span id="cb64-2"><a href="temel-obje-türleri.html#cb64-2"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="temel-obje-türleri.html#cb64-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fl">3.14</span></span>
+<span id="cb64-2"><a href="temel-obje-türleri.html#cb64-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] 3.14</code></pre>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="temel-obje-türleri.html#cb66-1"></a><span class="kw">class</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="temel-obje-türleri.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span></code></pre></div>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="temel-obje-türleri.html#cb68-1"></a>x=<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">0</span></span>
-<span id="cb68-2"><a href="temel-obje-türleri.html#cb68-2"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="temel-obje-türleri.html#cb68-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">0</span></span>
+<span id="cb68-2"><a href="temel-obje-türleri.html#cb68-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] Inf</code></pre>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="temel-obje-türleri.html#cb70-1"></a><span class="kw">class</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="temel-obje-türleri.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span></code></pre></div>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="temel-obje-türleri.html#cb72-1"></a>x =<span class="st"> </span><span class="dv">0</span> <span class="op">/</span><span class="st"> </span><span class="dv">0</span></span>
-<span id="cb72-2"><a href="temel-obje-türleri.html#cb72-2"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="temel-obje-türleri.html#cb72-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">0</span> <span class="sc">/</span> <span class="dv">0</span></span>
+<span id="cb72-2"><a href="temel-obje-türleri.html#cb72-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] NaN</code></pre>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="temel-obje-türleri.html#cb74-1"></a><span class="kw">class</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="temel-obje-türleri.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span></code></pre></div>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
 <p>Burada ilginç olan kısımlar:</p>
 <ol style="list-style-type: decimal">
 <li>R tam sayıları da özellikle belirtmediğimiz sürece nümerik olarak alıyor</li>
 <li><code>Sonsuz</code>un (<code>Inf</code>) veri tipi nümerik</li>
-<li><code>NaN</code> (“not a number”, “sayı değil”) değeri de nümerik sınıfında.</li>
+<li><code>NaN</code> (“not a number,” “sayı değil”) değeri de nümerik sınıfında.</li>
 </ol>
 </div>
 <div id="tam-sayılar-integer" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> Tam sayılar (integer)</h2>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="temel-obje-türleri.html#cb76-1"></a>x =<span class="st"> </span>3L</span>
-<span id="cb76-2"><a href="temel-obje-türleri.html#cb76-2"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="temel-obje-türleri.html#cb76-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> 3L</span>
+<span id="cb76-2"><a href="temel-obje-türleri.html#cb76-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="temel-obje-türleri.html#cb78-1"></a><span class="kw">class</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="temel-obje-türleri.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span></code></pre></div>
 <pre><code>## [1] &quot;integer&quot;</code></pre>
 <p>Özellikle tam sayı oluşturmak istiyorsak sondaki L ekini kullanmalıyız.</p>
 </div>
 <div id="kompleks-complex" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> Kompleks (complex)</h2>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="temel-obje-türleri.html#cb80-1"></a>x =<span class="st"> </span><span class="dv">1</span><span class="op">+</span>4i</span>
-<span id="cb80-2"><a href="temel-obje-türleri.html#cb80-2"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="temel-obje-türleri.html#cb80-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">1</span><span class="sc">+</span>4i</span>
+<span id="cb80-2"><a href="temel-obje-türleri.html#cb80-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] 1+4i</code></pre>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="temel-obje-türleri.html#cb82-1"></a><span class="kw">class</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="temel-obje-türleri.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span></code></pre></div>
 <pre><code>## [1] &quot;complex&quot;</code></pre>
 </div>
 <div id="mantıksal-logical-boolean" class="section level2" number="4.5">
 <h2><span class="header-section-number">4.5</span> Mantıksal (logical, boolean)</h2>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="temel-obje-türleri.html#cb84-1"></a>x =<span class="st"> </span><span class="ot">TRUE</span></span>
-<span id="cb84-2"><a href="temel-obje-türleri.html#cb84-2"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="temel-obje-türleri.html#cb84-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="cn">TRUE</span></span>
+<span id="cb84-2"><a href="temel-obje-türleri.html#cb84-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="temel-obje-türleri.html#cb86-1"></a><span class="kw">class</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="temel-obje-türleri.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span></code></pre></div>
 <pre><code>## [1] &quot;logical&quot;</code></pre>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="temel-obje-türleri.html#cb88-1"></a>x =<span class="st"> </span><span class="ot">FALSE</span></span>
-<span id="cb88-2"><a href="temel-obje-türleri.html#cb88-2"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="temel-obje-türleri.html#cb88-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="cn">FALSE</span></span>
+<span id="cb88-2"><a href="temel-obje-türleri.html#cb88-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="temel-obje-türleri.html#cb90-1"></a><span class="kw">class</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="temel-obje-türleri.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span></code></pre></div>
 <pre><code>## [1] &quot;logical&quot;</code></pre>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="temel-obje-türleri.html#cb92-1"></a>x =<span class="st"> </span>T</span>
-<span id="cb92-2"><a href="temel-obje-türleri.html#cb92-2"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="temel-obje-türleri.html#cb92-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> T</span>
+<span id="cb92-2"><a href="temel-obje-türleri.html#cb92-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>TRUE ve FALSE iki temel mantıksal değişken (True=Doğru, False=Yanlış). Sadece baş harfleri kullanılarak da ifade edilebilirler.</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="temel-obje-türleri.html#cb94-1"></a>x =<span class="st"> </span>f</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="temel-obje-türleri.html#cb94-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> f</span></code></pre></div>
 <pre><code>## Error in eval(expr, envir, enclos): object &#39;f&#39; not found</code></pre>
 <p>Ancak bu harfler büyük harf olmali yoksa <code>f</code> ismindeki objeye eşitlemeye çalışmış oluyoruz x’i.</p>
 <p>Alıştırma olarak şu objelerin sınıflarını tahmin etmeye çalışıp, yanılıp yanılmadığınızı kontrol edebilirsiniz:</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="temel-obje-türleri.html#cb96-1"></a>a=<span class="st">&#39;5&#39;</span> </span>
-<span id="cb96-2"><a href="temel-obje-türleri.html#cb96-2"></a>b=<span class="st">&#39;T&#39;</span></span>
-<span id="cb96-3"><a href="temel-obje-türleri.html#cb96-3"></a>y=<span class="fl">10.5</span>L</span>
-<span id="cb96-4"><a href="temel-obje-türleri.html#cb96-4"></a>x=<span class="st">&#39;y&#39;</span></span>
-<span id="cb96-5"><a href="temel-obje-türleri.html#cb96-5"></a>d=x</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="temel-obje-türleri.html#cb96-1" aria-hidden="true" tabindex="-1"></a>a<span class="ot">=</span><span class="st">&#39;5&#39;</span> </span>
+<span id="cb96-2"><a href="temel-obje-türleri.html#cb96-2" aria-hidden="true" tabindex="-1"></a>b<span class="ot">=</span><span class="st">&#39;T&#39;</span></span>
+<span id="cb96-3"><a href="temel-obje-türleri.html#cb96-3" aria-hidden="true" tabindex="-1"></a>y<span class="ot">=</span><span class="fl">10.5</span>L</span>
+<span id="cb96-4"><a href="temel-obje-türleri.html#cb96-4" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span><span class="st">&#39;y&#39;</span></span>
+<span id="cb96-5"><a href="temel-obje-türleri.html#cb96-5" aria-hidden="true" tabindex="-1"></a>d<span class="ot">=</span>x</span></code></pre></div>
 <p>Tırnak işaretleri içinde veriler girildiğinden <code>a</code>, <code>b</code>, <code>x</code>, ve dolayısıyla <code>d</code> objeleri karakter tipindedir. <code>y</code> ise ondalıklı değer girdiğimizden <code>L</code> uzantısını kullansak da tam sayı değil nümerik tipindedir.</p>
 <p>İlerledikçe <code>class()</code> fonksiyonu ile objelere baktığınızda farklı cevaplar alacağız. Mesela objelerden oluşan objelerimiz olduğunda - 1den 100e kadar olan sayıları içeren 10x10luk bir matrisiniz varsa mesela (<code>class(matrix(1:100,10))</code>). Veya R’ın nesne tabalı programlama (object oriented programming) dili olmasının getirisi olarak, yeni obje sınıfları ile çalıştığınızda.</p>
 <p>Eğer ki obje açık bir obje sınıfına sahipse (örn. matrix gibi), nümerik değerlerden oluşan bir obje mi, karakter objesi mi, bunu görmek yerine sınıfını göreceksiniz. Bu durumda <code>mode()</code> fonksiyonunu kullanarak ne tip objelerden oluştuğunu görebiliriz, örn <code>mode(matrix(1:100,10))</code>.</p>
@@ -320,7 +321,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -339,6 +339,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -359,6 +360,10 @@ gitbook.start({
 "text": null
 },
 "download": ["R_Giris.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }
